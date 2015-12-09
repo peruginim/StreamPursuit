@@ -1,4 +1,7 @@
 <!DOCTYPE HTML>
+<?php
+session_start();
+?>
 <html lan="en">
 <head>
 	<title>Welcome to Perugini.co!</title>
@@ -24,7 +27,17 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="">Login/Register</a>
+                        <?php
+                            if(isset($_SESSION['username']))
+                            {
+                                echo "<a>Hi " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "!</a></li>";
+                                echo "<li><a href=\"/login_and_register/logout.php\">Logout</a>";
+                            }
+                            else
+                            {
+                                echo "<a href=\"login_and_register/login.php\">Login/Register</a>";
+                            }
+                            ?>
                     </li>
                 </ul>
             </div>
