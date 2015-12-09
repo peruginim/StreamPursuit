@@ -16,7 +16,7 @@ $_SESSION['lastName'];
 </head>
 <body>
 <div class="container">
-<div class="navbar navbar-default navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
 	<div class="navbar-header">
 	  <a href="../index.php" class="navbar-brand">perugini.co</a>
@@ -80,8 +80,8 @@ else
 	</div>
 	<div class="form-group">
 	  <div class="col-lg-10 col-lg-offset-2">
-		<form><input type="button" value="Cancel" onClick="window.location.href='../MovieDB.php'" class="btn btn-default"></form>
-		<button name="login" value="Log-In" type="login" class="btn btn-primary">Login</button>
+		<button name="login" value="Log-In" type="login" class="btn btn-success">Login</button>
+		<form><input type="button" value="Cancel" onClick="window.location.href='../MovieDB.php'" class="btn btn-inverse"></form>
 	  </div>
 	</div>
   </fieldset>
@@ -100,7 +100,7 @@ else
 			</br>
 			<h1>Register</h1>
 			<p>If you have never registered a username, please do so by clicking the register button!</p>
-			<p><a href="register.php" class="btn btn-primary btn-lg">Register</a></p>
+			<p><a href="register.php" class="btn btn-success btn-lg">Register</a></p>
 		</div>
 	</div>
 </div>
