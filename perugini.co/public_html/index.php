@@ -11,7 +11,7 @@ session_start();
 </head>
 <body>
     
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <a href="index.html" class="navbar-brand">perugini.co</a>
