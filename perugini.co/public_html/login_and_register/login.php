@@ -11,15 +11,15 @@ $_SESSION['lastName'];
 <meta charset="UTF-8">
 <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="https://bootswatch.com/darkly/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 <title>Login</title>
 </head>
 <body>
 <div class="container">
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top">
   <div class="container">
 	<div class="navbar-header">
-	  <a href="../index.php" class="navbar-brand">perugini.co</a>
+	  <a href="../index.php" class="navbar-brand">TwitchDen</a>
 	</div>
 	<div class="navbar-collapse collapse" id="navbar-main">
 	  <ul class="nav navbar-nav">
@@ -80,8 +80,8 @@ else
 	</div>
 	<div class="form-group">
 	  <div class="col-lg-10 col-lg-offset-2">
-		<button name="login" value="Log-In" type="login" class="btn btn-success">Login</button>
-		<form><input type="button" value="Cancel" onClick="window.location.href='../MovieDB.php'" class="btn btn-inverse"></form>
+		<button name="login" value="Log-In" type="login" class="btn btn-primary">Login</button>
+		<form><input type="button" value="Cancel" onClick="window.location.href='../MovieDB.php'" class="btn btn-default"></form>
 	  </div>
 	</div>
   </fieldset>
@@ -100,7 +100,7 @@ else
 			</br>
 			<h1>Register</h1>
 			<p>If you have never registered a username, please do so by clicking the register button!</p>
-			<p><a href="register.php" class="btn btn-success btn-lg">Register</a></p>
+			<p><a href="register.php" class="btn btn-primary btn-lg">Register</a></p>
 		</div>
 	</div>
 </div>
