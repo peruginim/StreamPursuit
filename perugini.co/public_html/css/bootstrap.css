@@ -4292,7 +4292,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   font-family: 'Dimitri';
   float: left;
   padding: 19.5px 15px;
-  font-size: 19px;
+  : 30px;
   line-height: 21px;
   height: 60px;
 }
@@ -4339,6 +4339,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-nav {
+  font-size: 19px;
   margin: 9.75px -15px;
 }
 .navbar-nav > li > a {
@@ -4515,6 +4516,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-color: transparent;
 }
 .navbar-default .navbar-brand {
+  font-size: 30px;
   color: #ffffff;
 }
 .navbar-default .navbar-brand:hover,
