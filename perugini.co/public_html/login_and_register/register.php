@@ -1,11 +1,7 @@
+<!DOCTYPE HTML>
 <?PHP
 session_start();
-$_SESSION['username'];
-$_SESSION['password'];
-$_SESSION['firstName'];
-$_SESSION['lastName'];
 ?>
-<!DOCTYPE HTML>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,7 +24,7 @@ $_SESSION['lastName'];
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="../images/twitchicon.ico/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-<title>Login</title>
+<title>Registration</title>
 </head>
 <body>
 <div class="container">
@@ -48,17 +44,17 @@ $_SESSION['lastName'];
 	  </ul>
 	  <ul class="nav navbar-nav navbar-right">
 	<li>
-<?php
-if(isset($_SESSION['username']))
-{
-	echo "<a>Hi " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "!</a></li>";
-	echo "<li><a href=\"logout.php\">Logout</a>";
-}
-else
-{
-	echo "<a href=\"login.php\">Login/Register</a>";
-}
-?>
+        <?php
+        if(isset($_SESSION['username']))
+        {
+            echo "<a>Hi " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "!</a></li>";
+            echo "<li><a href=\"logout.php\">Logout</a>";
+        }
+        else
+        {
+            echo "<a href=\"login.php\">Login/Register</a>";
+        }
+        ?>
 	</li>
 	  </ul>
 	</div>
@@ -68,20 +64,21 @@ else
 </br>
 </br>
 </br>
+
 <div class="bs-docs-section">
   <div class="wrapper">
 	<div class="col-lg-12">
       <div class="page-header">
-		<h1 id="forms">Login</h1>
+		<h1 id="forms">Create an Account!</h1>
 	  </div>
 	</div>
   </div>
 <div class="wrapper">
 <div class="col-lg-6">
 <div class="well bs-component">
-<form method="POST" class="form-horizontal" ACTION="result.php">
+<form method="POST" class="form-horizontal" ACTION="newUser.php">
   <fieldset>
-	<legend>Enter Username/Password</legend>
+	<legend>New User Form</legend>
 	<div class="form-group">
 	  <label for="inputUsername" class="col-lg-2 control-label">Username</label>
 	  <div class="col-lg-10">
@@ -95,9 +92,21 @@ else
 	  </div>
 	</div>
 	<div class="form-group">
+	  <label for="inputFirstName" class="col-lg-2 control-label">First</label>
+	  <div class="col-lg-10">
+		<input name="first" type="firstName" class="form-control" id="inputFirstName" placeholder="First Name">
+	  </div>
+	</div>
+	<div class="form-group">
+	  <label for="inputLastName" class="col-lg-2 control-label">Last</label>
+	  <div class="col-lg-10">
+		<input name="last" type="lastName" class="form-control" id="inputLastName" placeholder="Last Name">
+	  </div>
+	</div>
+	<div class="form-group">
 	  <div class="col-lg-10 col-lg-offset-2">
-		<button name="login" value="Log-In" type="login" class="btn btn-primary">Login</button>
-		<form><input type="button" value="Cancel" onClick="window.location.href='../index.php'" class="btn btn-default"></form>
+		<form><input type="button" value="Cancel" onClick="window.location.href='../MovieDB.php'" class="btn btn-default"></form>
+		<button name="submit" type="submit" class="btn btn-primary">Submit</button>
 	  </div>
 	</div>
   </fieldset>
@@ -106,19 +115,5 @@ else
 </div>
 </div>
 </div>
-<div class="wrapper">
-	<div class="bs-component">
-		<div class="jumbotron">
-			</br>
-			</br>
-			</br>
-			</br>
-			</br>
-			<h1>Register</h1>
-			<p>If you have never registered a username, please do so by clicking the register button!</p>
-			<p><a href="register.php" class="btn btn-primary btn-lg">Register</a></p>
-		</div>
-	</div>
-</div>
-</div>
+</div
 </body>
