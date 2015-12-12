@@ -31,7 +31,7 @@ session_start();
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a href="index.html" class="navbar-brand">TwitchDen</a>
+                <a href="index.php" class="navbar-brand">TwitchDen</a>
             </div>
             <div class="navbar-collapse collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
@@ -48,7 +48,7 @@ session_start();
                             if(isset($_SESSION['username']))
                             {
                                 echo "<a>Hi " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "!</a></li>";
-                                echo "<li><a href=\"/login_and_register/logout.php\">Logout</a>";
+                                echo "<li><a href=\"login_and_register/logout.php\">Logout</a>";
                             }
                             else
                             {
