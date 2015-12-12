@@ -1,7 +1,7 @@
-<!DOCTYPE HTML>
 <?php
 session_start();
 ?>
+<!DOCTYPE HTML>
 <html lan="en">
 <head>
 	<title>Welcome to Perugini.co!</title>
