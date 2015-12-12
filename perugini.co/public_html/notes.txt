@@ -26,3 +26,5 @@ command line: mongo
 start database?: mongodb
 
 left off on javascript #38
+
+sudo service mongod start / stop / restart
