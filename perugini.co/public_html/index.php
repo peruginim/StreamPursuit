@@ -71,7 +71,7 @@ session_start();
 
 	<div class="container">
 		<h1>Success!  The perugini.co virtual host is working! Added TwitchPlaysPokemon chat to test API.</h1>
-        <iframe style="width: 300px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>
+        <iframe style="width: 350px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>
 	</div>
 </body>
 </html>
