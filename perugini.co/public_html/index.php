@@ -67,9 +67,28 @@ session_start();
     </br>
     </br>
 
-	<div class="container">
-		<h1>Success!  The perugini.co virtual host is working! Added TwitchPlaysPokemon chat to test API.</h1>
-        <iframe style="width: 350px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>
-	</div>
+    <div class="container">
+    <h1>Success!  The perugini.co virtual host is working! Added TwitchPlaysPokemon chat to test API.</h1>
+    <iframe style="width: 350px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <ul class="list-inline">
+                    <li class="pull-right"><a href="#top">Back to top</a></li>
+                    <li><a href="http://news.bootswatch.com" onclick="pageTracker._link(this.href); return false;">Blog</a></li>
+                    <li><a href="http://feeds.feedburner.com/bootswatch">RSS</a></li>
+                    <li><a href="https://twitter.com/bootswatch">Twitter</a></li>
+                    <li><a href="https://github.com/thomaspark/bootswatch/">GitHub</a></li>
+                    <li><a href="../help/#api">API</a></li>
+                    <li><a href="../help/#support">Support</a></li>
+                </ul>
+                <p>Made by <a href="" rel="nofollow">Michael Perugini</a>. Contact him at <a href="">11peruginiM@gmail.com.</p>
+            <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+</div>
 </body>
 </html>
