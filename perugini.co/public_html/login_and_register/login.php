@@ -34,25 +34,25 @@ $_SESSION['lastName'];
 
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
-                <!--<span class="sr-only">Toggle navigation</span>-->
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                </button>
-                <a href="../index.php" class="navbar-brand">TwitchDen</a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar-main">
-                <ul class="nav navbar-nav">
-                    <li><a href="">Games</a></li>
-                    <li><a href="">Channels</a></li>
-                    <li><a href="../about.php">About</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <?php
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+                        <!--<span class="sr-only">Toggle navigation</span>-->
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="../index.php" class="navbar-brand">TwitchDen</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-main">
+                    <ul class="nav navbar-nav">
+                        <li><a href="">Games</a></li>
+                        <li><a href="">Channels</a></li>
+                        <li><a href="../about.php">About</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <?php
                             if(isset($_SESSION['username']))
                             {
                                 echo "<a>Hi " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "!</a></li>";
@@ -63,15 +63,16 @@ $_SESSION['lastName'];
                                 echo "<a href=\"login_and_register/login.php\">Login/Register</a>";
                             }
                             ?>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-            </br>
-            </br>
-            </br>
+        </br>
+        </br>
+        </br>
+        <div class="container">
             <div class="bs-docs-section">
                 <div class="wrapper">
                     <div class="col-lg-12">
