@@ -53,7 +53,7 @@ session_unset();
                             if(isset($_SESSION['username']))
                             {
                                 echo "<a>Hi " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "!</a></li>";
-                                echo "<li><a href=\"login_and_register/logout.php\">Logout</a>";
+                                echo "<li><a href=\"logout.php\">Logout</a>";
                             }
                             else
                             {

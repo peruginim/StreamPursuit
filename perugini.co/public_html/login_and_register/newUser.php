@@ -77,11 +77,11 @@ if(isset($_POST['submit']))
                             if(isset($_SESSION['username']))
                             {
                                 echo "<a>Hi " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "!</a></li>";
-                                echo "<li><a href=\"login_and_register/logout.php\">Logout</a>";
+                                echo "<li><a href=\"logout.php\">Logout</a>";
                             }
                             else
                             {
-                                echo "<a href=\"login_and_register/login.php\">Login/Register</a>";
+                                echo "<a href=\"login.php\">Login/Register</a>";
                             }
                             ?>
                         </li>
