@@ -27,12 +27,19 @@ session_start();
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="images/twitchicon.ico/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <script src="httpFunctions.js"></script>
 </head>
 <body>
 
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
             <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
                 <a href="index.php" class="navbar-brand">TwitchDen</a>
             </div>
             <div class="navbar-collapse collapse" id="navbar-main">
@@ -61,27 +68,62 @@ session_start();
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
 
     </br>
     </br>
     </br>
 
     <div class="container">
-    <h1>Success!  The perugini.co virtual host is working! Added TwitchPlaysPokemon chat to test API.</h1>
-    <iframe style="width: 350px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>
+    <h1>Detailed twitch stats and more!</h1>
+    <p>Connect with friends to find who they're following or currently watching. Detailed, live stats on twitch streams. You'll
+        be able to see peaks in viewership. Get insight into popular streaming times both site-wide and streamer specific.</p>
+    <!--<iframe style="width: 350px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>//-->
+    <script type="text/javascript">
+        
+        function numberWithCommas(x) 
+        { 
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
+        }
+        //document.write(httpGet("https://api.twitch.tv/kraken/users/nezzi240p") + "</br>");
+        //var twitchRequest = JSON.parse(httpGet("https://api.twitch.tv/kraken/users/nezzi240p"));
+        //document.write(twitchRequest.display_name);
+    </script>
+    </br>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Twitch Stats</h3>
+        </div>
+        <div class="panel-body">
+            <script type="text/javascript">
+                var twitchSummary = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams/summary"));
+                var topGame = JSON.parse(httpGet("https://api.twitch.tv/kraken/games/top"));
+                var topStream = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams"));
+            </script>
+            <ul class="list-unstyled">
+            <li>Current Streamers: <script type="text/javascript">document.write(numberWithCommas(twitchSummary.channels));</script></li>
+            <li>Current Viewers: <script type="text/javascript">document.write(numberWithCommas(twitchSummary.viewers));</script></li>
+            <li>Top Game: <script type="text/javascript">document.write(topGame.top[0].game.name);</script></li>
+            <li>Top Stream: <script type="text/javascript">document.write(topStream.streams[0].channel.display_name);</script></li>
+            </ul>
+            <script type="text/javascript">
+                
+            </script>
+        </div>
+    </div>
     <footer>
         <div class="row">
             <div class="col-lg-12">
 
                 <ul class="list-inline">
                     <li class="pull-right"><a href="#top">Back to top</a></li>
+                    <li><a href="www.twitch.tv">Twitch</a></li>
                     <li><a href="https://twitter.com/peruginim">Twitter</a></li>
                     <li><a href="https://github.com/peruginim">GitHub</a></li>
                     <li><a href="https://github.com/justintv/Twitch-API">API</a></li>
                 </ul>
-                <p>Made by <a href="" rel="nofollow">Michael Perugini</a>. Contact him at <a href="">11peruginiM@gmail.com.</p>
-            <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
+                <p>Made by <a href="" rel="nofollow">Michael Perugini</a> with <a href="https://github.com/justintv/Twitch-API">Twitch API</a>. Contact him at <a href="">11peruginiM@gmail.com.</p>
+                <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>. Twitch font from <a href="http://www.dafont.com/dimitri.font">dafont</a>.</p>
 
             </div>
         </div>
