@@ -67,45 +67,21 @@ session_start();
         </div>
     </nav>
 
-    </br>
-    </br>
-    </br>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <div class="container">
-    <h1>Detailed twitch stats and more!</h1>
-    <p>Connect with friends to find who they're following or currently watching. Detailed, live stats on twitch streams. You'll
-        be able to see peaks in viewership. Get insight into popular streaming times both site-wide and streamer specific.</p>
-    <!--<iframe style="width: 350px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>//-->
-    <script type="text/javascript">
-        
-        function numberWithCommas(x) 
-        { 
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
-        }
-        //document.write(httpGet("https://api.twitch.tv/kraken/users/nezzi240p") + "</br>");
-        //var twitchRequest = JSON.parse(httpGet("https://api.twitch.tv/kraken/users/nezzi240p"));
-        //document.write(twitchRequest.display_name);
-    </script>
-    </br>
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">Twitch Stats</h3>
+            <h3 class="panel-title">About TwitchDen</h3>
         </div>
         <div class="panel-body">
-            <script type="text/javascript">
-                var twitchSummary = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams/summary"));
-                var topGame = JSON.parse(httpGet("https://api.twitch.tv/kraken/games/top"));
-                var topStream = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams"));
-            </script>
-            <ul class="list-unstyled">
-            <li>Current Streamers: <script type="text/javascript">document.write(numberWithCommas(twitchSummary.channels));</script></li>
-            <li>Current Viewers: <script type="text/javascript">document.write(numberWithCommas(twitchSummary.viewers));</script></li>
-            <li>Top Game: <script type="text/javascript">document.write(topGame.top[0].game.name);</script></li>
-            <li>Top Stream: <script type="text/javascript">document.write(topStream.streams[0].channel.display_name);</script></li>
-            </ul>
-            <script type="text/javascript">
-                
-            </script>
+            <p>TwitchDen is a website I wanted to create to learn and brush up on web development from the ground up. I wanted to remember how to launch and set up a VPS, get apache, mongodb, git, etc set up, and to re-learn php. So far I've used php to set up the bulk of the site. It's handeling user login/logout right now (not that it's very useful right now).</p>
+            <p>My goal for this site is to do some cool stuff with the Twitch API, like show stats such as current viewcount and streamcount. I want to be able to display live graphs/stats on twitch streams to show viewship over time. I think that'll be a pretty cool thing that would interest a lot of people, not just viewers. I'd also really like to make this more of a social space, where people can link their twitch accounts to their site accounts, add friends to their on-site account, and follow what their friends are watching. I'd like people to be able to find what channels their friends are following, what their friends are watching right now, and be able to share streams or talk about them in some way (not 100% sure about the last one).</p>
+            <p>I think that twitch's api provides a lot of cool data that viewers usually don't get to see unless the broadcaster has some bot that allows them to type in commands. I know that there's a way to find how long a broadcaster has been streaming, and I'd like to maybe collect that data over time to show average stream time, and maybe auto-generate schedules for that time. What I mean by that is to gather start and end times, get the average start and average end time, and be able to display that information as a "Predicted Start Time: 12:30 PST" "Predicted Stream Length: 4 Hours" or something like that.</p>
+            <p>I have a lot of learning to do, like learning how to integrate twitch accounts with site accounts, but I think I could make this site into something people would actually use.</p>
         </div>
     </div>
 

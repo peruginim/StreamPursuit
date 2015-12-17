@@ -54,39 +54,41 @@ if(isset($_POST['submit']))
     </head>
 
     <body>
-        <div class="container">
-            <div class="navbar navbar-default navbar-fixed-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <a href="../index.php" class="navbar-brand">TwitchDen</a>
-                    </div>
-                    <div class="navbar-collapse collapse" id="navbar-main">
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <a href="">Resume</a>
-                            </li>
-                            <li>
-                                <a href="">About</a>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <?php
-        if(isset($_SESSION['username']))
-        {
-            echo "<a>Hi " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "!</a></li>";
-            echo "<li><a href=\"logout.php\">Logout</a>";
-        }
-        else
-        {
-            echo "<a href=\"login.php\">Login/Register</a>";
-        }
-        ?>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+        <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+                <!--<span class="sr-only">Toggle navigation</span>-->
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a href="index.php" class="navbar-brand">TwitchDen</a>
             </div>
+            <div class="collapse navbar-collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li><a href="">Games</a></li>
+                    <li><a href="">Channels</a></li>
+                    <li><a href="../about.php">About</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <?php
+                            if(isset($_SESSION['username']))
+                            {
+                                echo "<a>Hi " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "!</a></li>";
+                                echo "<li><a href=\"login_and_register/logout.php\">Logout</a>";
+                            }
+                            else
+                            {
+                                echo "<a href=\"login_and_register/login.php\">Login/Register</a>";
+                            }
+                            ?>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
             </br>
             </br>
