@@ -6,7 +6,10 @@ session_start();
 <head>
 	<title>Welcome to Perugini.co!</title>
 	<meta charset="UTF-8">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="httpFunctions.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -27,7 +30,6 @@ session_start();
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="images/twitchicon.ico/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <script src="httpFunctions.js"></script>
 </head>
 <body>
 
@@ -35,7 +37,7 @@ session_start();
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
-                <!--<span class="sr-only">Toggle navigation</span>-->
+                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
