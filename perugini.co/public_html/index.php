@@ -58,7 +58,6 @@ session_start();
         $('.twitch-connect').click(function() {
             Twitch.login({
                 scope: ['user_read', 'channel_read']
-                redirect_uri: ['http://perugini.co']
             });
         })
 
