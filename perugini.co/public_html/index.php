@@ -35,53 +35,59 @@ session_start();
     <meta name="msapplication-TileImage" content="images/twitchicon.ico/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <script>
-    //clientId: '2p0yndyzg3qjty0yfbywvngdgirwkev';
-        window.CLIENT_ID = '2p0yndyzg3qjty0yfbywvngdgirwkev';
-        $(function() {
-          // Initialize. If we are already logged in, there is no
-          // need for the connect button
-          Twitch.init({clientId: CLIENT_ID}, function(error, status) {
+    window.CLIENT_ID = '2p0yndyzg3qjty0yfbywvngdgirwkev';
+    $(function() {
+        // Initialize. If we are already logged in, there is no
+        // need for the connect button
+        Twitch.init({
+            clientId: CLIENT_ID
+        }, function(error, status) {
             if (status.authenticated) {
-              // we're logged in :)
-              $('.status input').val('Logged in! Allowed scope: ' + status.scope);
-              // Show the data for logged-in users
-              $('.authenticated').removeClass('hidden');
+                // we're logged in :)
+                $('.status input').val('Logged in! Allowed scope: ' + status.scope);
+                // Show the data for logged-in users
+                $('.authenticated').removeClass('hidden');
             } else {
-              $('.status input').val('Not Logged in! Better connect with Twitch!');
-              // Show the twitch connect button
-              $('.authenticate').removeClass('hidden');
+                $('.status input').val('Not Logged in! Better connect with Twitch!');
+                // Show the twitch connect button
+                $('.authenticate').removeClass('hidden');
             }
-          });
+        });
 
 
-          $('.twitch-connect').click(function() {
+        $('.twitch-connect').click(function() {
             Twitch.login({
-              scope: ['user_read', 'channel_read']
+                scope: ['user_read', 'channel_read']
+                redirect_uri: ['http://perugini.co']
             });
-          })
+        })
 
-          $('.twitch-logout').click(function() {
+        $('.twitch-logout').click(function() {
             Twitch.logout();
 
             // Reload page and reset url hash. You shouldn't
             // need to do this.
             window.location = window.location.pathname
-          })
+        })
 
-          $('#get-name button').click(function() {
-            Twitch.api({method: 'user'}, function(error, user) {
-              $('#get-name input').val(user.display_name);
+        $('#get-name button').click(function() {
+            Twitch.api({
+                method: 'user'
+            }, function(error, user) {
+                $('#get-name input').val(user.display_name);
             });
-          })
+        })
 
-          $('#get-stream-key button').click(function() {
-            Twitch.api({method: 'channel'}, function(error, channel) {
-              $('#get-stream-key input').val(channel.stream_key);
+        $('#get-stream-key button').click(function() {
+            Twitch.api({
+                method: 'channel'
+            }, function(error, channel) {
+                $('#get-stream-key input').val(channel.stream_key);
             });
-          })
+        })
 
-        });
-    </script>
+    });
+</script>
 </head>
 <body>
 
@@ -123,15 +129,12 @@ session_start();
     <p>Connect with friends to find who they're following or currently watching. Detailed, live stats on twitch streams. You'll
         be able to see peaks in viewership. Get insight into popular streaming times both site-wide and streamer specific.</p>
     <!--<iframe style="width: 350px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>//-->
-    <script type="text/javascript">
+    <script>
         
         function numberWithCommas(x) 
         { 
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
         }
-        //document.write(httpGet("https://api.twitch.tv/kraken/users/nezzi240p") + "</br>");
-        //var twitchRequest = JSON.parse(httpGet("https://api.twitch.tv/kraken/users/nezzi240p"));
-        //document.write(twitchRequest.display_name);
     </script>
     </br>
     <div class="panel panel-primary">
