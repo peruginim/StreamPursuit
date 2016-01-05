@@ -10,7 +10,7 @@ session_start();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
-    
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="httpFunctions.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -57,7 +57,8 @@ session_start();
 
         $('.twitch-connect').click(function() {
             Twitch.login({
-                scope: ['user_read', 'channel_read']
+				scope: ['user_read', 'channel_read'],
+				redirect_uri: 'http://perugini.co'
             });
         })
 
@@ -129,10 +130,10 @@ session_start();
         be able to see peaks in viewership. Get insight into popular streaming times both site-wide and streamer specific.</p>
     <!--<iframe style="width: 350px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>//-->
     <script>
-        
-        function numberWithCommas(x) 
-        { 
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
+
+        function numberWithCommas(x)
+        {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
     </script>
     </br>
@@ -153,7 +154,7 @@ session_start();
             <li>Top Stream: <script type="text/javascript">document.write(topStream.streams[0].channel.display_name);</script></li>
             </ul>
             <script type="text/javascript">
-                
+
             </script>
         </div>
     </div>
