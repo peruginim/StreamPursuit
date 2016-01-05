@@ -8,8 +8,12 @@ session_start();
 	<meta charset="UTF-8">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
+    
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="httpFunctions.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -30,6 +34,54 @@ session_start();
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="images/twitchicon.ico/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <script>
+    //clientId: '2p0yndyzg3qjty0yfbywvngdgirwkev';
+        window.CLIENT_ID = '2p0yndyzg3qjty0yfbywvngdgirwkev';
+        $(function() {
+          // Initialize. If we are already logged in, there is no
+          // need for the connect button
+          Twitch.init({clientId: CLIENT_ID}, function(error, status) {
+            if (status.authenticated) {
+              // we're logged in :)
+              $('.status input').val('Logged in! Allowed scope: ' + status.scope);
+              // Show the data for logged-in users
+              $('.authenticated').removeClass('hidden');
+            } else {
+              $('.status input').val('Not Logged in! Better connect with Twitch!');
+              // Show the twitch connect button
+              $('.authenticate').removeClass('hidden');
+            }
+          });
+
+
+          $('.twitch-connect').click(function() {
+            Twitch.login({
+              scope: ['user_read', 'channel_read']
+            });
+          })
+
+          $('.twitch-logout').click(function() {
+            Twitch.logout();
+
+            // Reload page and reset url hash. You shouldn't
+            // need to do this.
+            window.location = window.location.pathname
+          })
+
+          $('#get-name button').click(function() {
+            Twitch.api({method: 'user'}, function(error, user) {
+              $('#get-name input').val(user.display_name);
+            });
+          })
+
+          $('#get-stream-key button').click(function() {
+            Twitch.api({method: 'channel'}, function(error, channel) {
+              $('#get-stream-key input').val(channel.stream_key);
+            });
+          })
+
+        });
+    </script>
 </head>
 <body>
 
@@ -51,27 +103,20 @@ session_start();
                     <li><a href="about.php">About</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <?php
-                            if(isset($_SESSION['username']))
-                            {
-                                echo "<a>Hi " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "!</a></li>";
-                                echo "<li><a href=\"login_and_register/logout.php\">Logout</a>";
-                            }
-                            else
-                            {
-                                echo "<a href=\"login_and_register/login.php\">Login/Register</a>";
-                            }
-                            ?>
+                    <li class="authenticate hidden">
+                        <a class="twitch-connect" href="#" style="font-family:'Dimitri'"><i class="fa fa-twitch"></i> Connect with Twitch</a>
+                    </li>
+                    <li class="authenticated hidden">
+                        <a class="twitch-logout" href="#" style="font-family:'Dimitri'"><i class="fa fa-sign-out"></i> Logout</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    </br>
-    </br>
-    </br>
+    <br/>
+    <br/>
+    <br/>
 
     <div class="container">
     <h1>Detailed twitch stats and more!</h1>
