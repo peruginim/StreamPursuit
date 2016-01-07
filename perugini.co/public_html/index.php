@@ -181,11 +181,10 @@ session_start();
         }
     </script>
     <br/>
-    <center>
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="col-md-1"></div>
-                <div class="col-md-7" id="chart_div" style="width: 480px; height: 180px;"></div>
+                <div class="col-md-7" id="chart_div" style="width: 450px; height: 180px;"></div>
                 <div class="col-md-1"></div>
                 <div class="col-md-3">
                     <div class="panel panel-primary">
@@ -227,7 +226,6 @@ session_start();
                 </div>
             </div>
         </div>
-    </center>
     
 
     <footer>
