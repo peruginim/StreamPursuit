@@ -10,7 +10,51 @@ session_start();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawChart);
 
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Time', 'Viewers'],
+                ['08:00', 513876],
+                ['11:00', 673625],
+                ['2:00', 876109],
+                ['5:00', 986626]
+            ]);
+
+            var options = {
+                title: 'Viewers',
+                backgroundColor: '#222222',
+                titleTextStyle: {
+                    color: '#ffffff'
+                },
+                hAxis: {
+                    textStyle: {
+                        color: '#ffffff'
+                    },
+                    titleTextStyle: {
+                        color: '#ffffff'
+                    }
+                },
+                vAxis: {
+                    minValue: 0,
+                    textStyle: {
+                        color: '#ffffff'
+                    }
+                },
+                legend: {
+                    position: 'none'
+                }
+            };
+
+            var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="httpFunctions.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -136,28 +180,55 @@ session_start();
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
     </script>
-    </br>
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">Twitch Stats</h3>
+    <br/>
+    <center>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="col-md-1"></div>
+                <div class="col-md-7" id="chart_div" style="width: 480px; height: 180px;"></div>
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Twitch Stats</h3>
+                        </div>
+                        <div class="panel-body">
+                            <script type="text/javascript">
+                                var twitchSummary = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams/summary"));
+                                var topGame = JSON.parse(httpGet("https://api.twitch.tv/kraken/games/top"));
+                                var topStream = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams"));
+                            </script>
+                            <ul class="list-unstyled">
+                                <li>Current Streamers:
+                                    <script type="text/javascript">
+                                        document.write(numberWithCommas(twitchSummary.channels));
+                                    </script>
+                                </li>
+                                <li>Current Viewers:
+                                    <script type="text/javascript">
+                                        document.write(numberWithCommas(twitchSummary.viewers));
+                                    </script>
+                                </li>
+                                <li>Top Game:
+                                    <script type="text/javascript">
+                                        document.write(topGame.top[0].game.name);
+                                    </script>
+                                </li>
+                                <li>Top Stream:
+                                    <script type="text/javascript">
+                                        document.write(topStream.streams[0].channel.display_name);
+                                    </script>
+                                </li>
+                            </ul>
+                            <script type="text/javascript">
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-            <script type="text/javascript">
-                var twitchSummary = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams/summary"));
-                var topGame = JSON.parse(httpGet("https://api.twitch.tv/kraken/games/top"));
-                var topStream = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams"));
-            </script>
-            <ul class="list-unstyled">
-            <li>Current Streamers: <script type="text/javascript">document.write(numberWithCommas(twitchSummary.channels));</script></li>
-            <li>Current Viewers: <script type="text/javascript">document.write(numberWithCommas(twitchSummary.viewers));</script></li>
-            <li>Top Game: <script type="text/javascript">document.write(topGame.top[0].game.name);</script></li>
-            <li>Top Stream: <script type="text/javascript">document.write(topStream.streams[0].channel.display_name);</script></li>
-            </ul>
-            <script type="text/javascript">
-
-            </script>
-        </div>
-    </div>
+    </center>
+    
 
     <footer>
         <div class="row">
