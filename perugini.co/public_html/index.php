@@ -27,7 +27,7 @@ session_start();
             ]);
 
             var options = {
-                title: 'Viewers',
+                title: 'Twitch Viewers',
                 backgroundColor: '#222222',
                 titleTextStyle: {
                     color: '#ffffff'
@@ -48,6 +48,9 @@ session_start();
                 },
                 legend: {
                     position: 'none'
+                },
+                series: {
+                    0: {color: '#7555B1'}
                 }
             };
 
@@ -134,7 +137,6 @@ session_start();
 </script>
 </head>
 <body>
-
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -183,10 +185,10 @@ session_start();
     <br/>
         <div class="container-fluid">
             <div class="row-fluid">
-                <div class="col-md-1"></div>
-                <div class="col-md-7" id="chart_div" style="width: 450px; height: 180px;"></div>
-                <div class="col-md-1"></div>
-                <div class="col-md-3">
+                <div class="col-md-8">
+                <div id="chart_div" style="width: 100%; height: 180px; overflow: show;"></div>
+                </div>
+                <div class="col-md-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title">Twitch Stats</h3>
