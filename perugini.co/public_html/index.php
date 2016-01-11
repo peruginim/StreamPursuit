@@ -12,51 +12,64 @@ session_start();
     <script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+        function drawChart() {
+            
+            var public_key = 'NJGqaM0GGbtRrOrd3DOd';
+
+            var jsonData = $.ajax({
+              url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+              //data: {page: 1},
+              dataType: 'jsonp',
+            }).done(function (results) {
+                var data = new google.visualization.DataTable();
+            
+                data.addColumn('datetime', 'Time');
+                data.addColumn('number', 'Viewers');
+                
+                var options = {
+                    title: 'Twitch Viewers',
+                    backgroundColor: '#222222',
+                    titleTextStyle: {
+                        color: '#ffffff'
+                    },
+                    hAxis: {
+                        textStyle: {
+                            color: '#ffffff'
+                        },
+                        titleTextStyle: {
+                            color: '#ffffff'
+                        }
+                    },
+                    vAxis: {
+                        minValue: 0,
+                        textStyle: {
+                            color: '#ffffff'
+                        }
+                    },
+                    legend: {
+                        position: 'none'
+                    },
+                    series: {
+                        0: {color: '#7555B1'}
+                    }
+                };
+
+              // loop through results and log temperature to the console
+              $.each(results, function (i, row) {
+                data.addRow([
+                    (new Date(row.timestamp)),
+                    parseFloat(row.viewers)
+                ]);
+              });
+
+            var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+            });
+        }
         google.charts.load('current', {
             'packages': ['corechart']
         });
         google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Time', 'Viewers'],
-                ['08:00', 513876],
-                ['11:00', 673625],
-                ['2:00', 876109],
-                ['5:00', 986626]
-            ]);
-
-            var options = {
-                title: 'Twitch Viewers',
-                backgroundColor: '#222222',
-                titleTextStyle: {
-                    color: '#ffffff'
-                },
-                hAxis: {
-                    textStyle: {
-                        color: '#ffffff'
-                    },
-                    titleTextStyle: {
-                        color: '#ffffff'
-                    }
-                },
-                vAxis: {
-                    minValue: 0,
-                    textStyle: {
-                        color: '#ffffff'
-                    }
-                },
-                legend: {
-                    position: 'none'
-                },
-                series: {
-                    0: {color: '#7555B1'}
-                }
-            };
-
-            var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-            chart.draw(data, options);
-        }
     </script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="httpFunctions.js"></script>
