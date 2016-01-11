@@ -73,3 +73,6 @@ date +"%H:%M" // gives hours & minutes
 Finding and killing background scripts:
 ps -u $USER | grep datagrab //or whatever script
 kill -KILL -20477 //-20477 being the PID number, will be different
+
+Running a script in the background:
+nohup [Script Here] & // eg: nohup ./datagrab.sh &
