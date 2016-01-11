@@ -32,3 +32,34 @@ sudo service mongod start / stop / restart
 Client ID: 2p0yndyzg3qjty0yfbywvngdgirwkev
 
 Streampoll.tv
+
+data.sparkfun.com info:
+Public URL
+
+http://data.sparkfun.com/streams/NJGqaM0GGbtRrOrd3DOd
+Public Key
+
+NJGqaM0GGbtRrOrd3DOd
+Private Key
+
+5d9g6jK99msWNdNJYBdJ
+Keep this key secret, and in a safe place.  You will not be able to retrieve it.
+
+Delete Key
+
+BpZOnw7ZZ9In535ake3a
+This key can only be used once.  Keep this key secret, and in a safe place.  You will not be able to retrieve it.
+
+Download Your Keys
+
+Download your keys as a JSON file.
+Keep this file secret and in a safe place.
+
+Logging using query string parameters
+Format:
+
+http://data.sparkfun.com/input/[publicKey]?private_key=[privateKey]&viewers=[value]
+Example:
+
+ http://data.sparkfun.com/input/NJGqaM0GGbtRrOrd3DOd?private_key=5d9g6jK99msWNdNJYBdJ&viewers=11.90
+If you would like to learn more about how to use data.sparkfun.com, please visit the documentation for more info.
