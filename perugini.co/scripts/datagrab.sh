@@ -2,7 +2,7 @@
 
 while [ 1 ]; do
 	# Grab Viewer count and Timestamp; Save them in respective varaibles
-	VWRS="$(curl -s 'https://api.twitch.tv/kraken/streams/summary' | jsawk 'return this.viewers')"
+	VWRS="$(curl -s 'https://api.twitch.tv/kraken/streams/summary' | jq '.viewers')"
 	TIME="$(date +"%H:%M")"
 
 	# Post this data to our sparkfun data stream
