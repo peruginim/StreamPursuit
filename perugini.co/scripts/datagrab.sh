@@ -1,6 +1,7 @@
 #!/bin/bash
 
-while [ 1 ]; do
+while [ 1 ]; 
+do
 	# Grab Viewer count and Timestamp; Save them in respective varaibles
 	VWRS="$(curl -s 'https://api.twitch.tv/kraken/streams/summary' | jq '.viewers')"
 	TIME="$(date +"%H:%M")"
@@ -12,4 +13,5 @@ while [ 1 ]; do
 		-H 'Phant-Private-Key: 5d9g6jK99msWNdNJYBdJ' \
 		-d "viewers=$VWRS&time=$TIME"
 	fi
+	sleep 60
 done
