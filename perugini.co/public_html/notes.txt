@@ -63,3 +63,13 @@ Example:
 
  http://data.sparkfun.com/input/NJGqaM0GGbtRrOrd3DOd?private_key=5d9g6jK99msWNdNJYBdJ&viewers=11.90
 If you would like to learn more about how to use data.sparkfun.com, please visit the documentation for more info.
+
+--- Script Notes ---
+
+Date Formating:
+date +"%T" // gives whole time
+date +"%H:%M" // gives hours & minutes
+
+Finding and killing background scripts:
+ps -u $USER | grep datagrab //or whatever script
+kill -KILL -20477 //-20477 being the PID number, will be different
