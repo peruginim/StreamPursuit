@@ -150,8 +150,8 @@ session_start();
 </script>
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
                 <span class="sr-only">Toggle navigation</span>
@@ -177,7 +177,7 @@ session_start();
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
 
     <br/>
     <br/>
