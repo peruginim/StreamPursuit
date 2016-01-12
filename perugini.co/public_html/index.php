@@ -28,7 +28,7 @@ session_start();
                 
                 var options = {
                     title: 'Twitch Viewers',
-                    backgroundColor: '#222222',
+                    backgroundColor: '#303030', // Was #222222
                     titleTextStyle: {
                         color: '#ffffff'
                     },
