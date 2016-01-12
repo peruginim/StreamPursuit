@@ -18,7 +18,7 @@ session_start();
 
             var jsonData = $.ajax({
               url: 'https://data.sparkfun.com/output/' + public_key + '.json',
-              //data: {page: 1},
+              //data: {page: 1}
               dataType: 'jsonp',
             }).done(function (results) {
                 var data = new google.visualization.DataTable();
@@ -150,7 +150,7 @@ session_start();
 </script>
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
@@ -177,7 +177,7 @@ session_start();
                 </ul>
             </div>
         </div>
-    </nav>
+    </div>
 
     <br/>
     <br/>
