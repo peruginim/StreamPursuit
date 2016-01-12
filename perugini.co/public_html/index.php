@@ -182,11 +182,14 @@ session_start();
     <br/>
     <br/>
     <br/>
+    <br/>
 
     <div class="container">
-    <h1>Detailed twitch stats and more!</h1>
-    <p>Connect with friends to find who they're following or currently watching. Detailed, live stats on twitch streams. You'll
-        be able to see peaks in viewership. Get insight into popular streaming times both site-wide and streamer specific.</p>
+        <div class="jumbotron">
+            <h1>Twitch Stats Galore!</h1>
+            <p>Get live stats on total number of viewers and streamers on twitch. Working on now makeing pages that show live stream
+        data for a specified stream.</p>
+        
     <!--<iframe style="width: 350px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>//-->
     <script>
 
@@ -241,6 +244,7 @@ session_start();
                 </div>
             </div>
         </div>
+        </div>
     
 
     <footer>
@@ -248,7 +252,7 @@ session_start();
             <div class="col-lg-12">
 
                 <ul class="list-inline">
-                    <li class="pull-right"><a href="#top">Back to top</a></li>
+                    <!--<li class="pull-right"><a href="#top">Back to top</a></li>-->
                     <li><a href="www.twitch.tv">Twitch</a></li>
                     <li><a href="https://twitter.com/peruginim">Twitter</a></li>
                     <li><a href="https://github.com/peruginim">GitHub</a></li>
