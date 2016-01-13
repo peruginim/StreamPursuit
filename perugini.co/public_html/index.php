@@ -13,14 +13,13 @@ session_start();
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         function drawChart() {
-            
             var public_key = 'NJGqaM0GGbtRrOrd3DOd';
 
             var jsonData = $.ajax({
-              url: 'https://data.sparkfun.com/output/' + public_key + '.json',
-              //data: {page: 1},
-              data: 'gt[timestamp]=now%20-1day',
-              dataType: 'jsonp',
+            url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+            //data: {page: 1},
+            data: 'gt[timestamp]=now%20-1day',
+            dataType: 'jsonp',
             }).done(function (results) {
                 var data = new google.visualization.DataTable();
             
@@ -30,7 +29,7 @@ session_start();
                 var options = {
                     title: 'Twitch Viewers',
                     backgroundColor: '#303030', // Was #222222
-                    animation: {"startup": true, duration: 2000, easing: 'out'},
+                    animation: {"startup": true, duration: 1500, easing: 'out'},
                     titleTextStyle: {
                         color: '#ffffff'
                     },
@@ -55,16 +54,19 @@ session_start();
                         0: {color: '#7555B1'} // Purple color that was mixed between twitch dark purple and light purple.
                     }
                 };
-
-              // loop through results and log temperature to the console
-              $.each(results, function (i, row) {
-                data.addRow([
-                    (new Date(row.timestamp)),
-                    parseFloat(row.viewers)
-                ]);
-              });
-
+                // loop through results and log temperature to the console
+                $.each(results, function (i, row) {
+                    //if($('#graph_progress').width <= 100)
+                    //    $('#graph_progress').width($('#graph_progress').width + 1);
+                    //document.getElementById("graph_progress").style.width = i + '%';
+                    data.addRow([
+                        (new Date(row.timestamp)),
+                        parseFloat(row.viewers)
+                    ]);
+                });
                 var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+                //$('.progress').removeClass('progress-striped');
+                $('.progress').remove();
                 chart.draw(data, options);
             });
         }
@@ -188,7 +190,7 @@ session_start();
 
     <div class="container">
         <div class="jumbotron">
-            <h1>Twitch Stats Galore!</h1>
+            <h1>Twitch Stats</h1>
             <p>Get live stats on total number of viewers and streamers on twitch. Working on now makeing pages that show live stream
         data for a specified stream.</p>
         
@@ -204,8 +206,11 @@ session_start();
             <div class="container-fluid">
                 <div class="row-fluid">
                     <div class="col-md-8">
-                    <div id="chart_div" style="width: 100%; height: 180px; overflow: show;"></div>
-                    </div>
+                        <div class="progress progress-striped active" style="margin-top: 75px">
+                            <div class="graph_progress progress-bar" style="width: 100%"></div>
+                        </div>
+                        <div id="chart_div" style="width: 100%; height: 180px; overflow: show;"></div>
+                        </div>
                     <div class="col-md-4">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
