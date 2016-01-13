@@ -76,3 +76,6 @@ kill -KILL -20477 //-20477 being the PID number, will be different
 
 Running a script in the background:
 nohup [Script Here] & // eg: nohup ./datagrab.sh &
+
+--- Icon Packs to Remember ---
+evil-icons.io
