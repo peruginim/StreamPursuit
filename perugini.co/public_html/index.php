@@ -206,7 +206,7 @@ session_start();
             <div class="container-fluid">
                 <div class="row-fluid">
                     <div class="col-md-8">
-                        <div class="progress progress-striped active" style="margin-top: 75px">
+                        <div class="progress progress-striped active" style="margin-top: 80px">
                             <div class="graph_progress progress-bar" style="width: 100%"></div>
                         </div>
                         <div id="chart_div" style="width: 100%; height: 180px; overflow: show;"></div>
