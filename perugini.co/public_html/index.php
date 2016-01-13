@@ -30,6 +30,7 @@ session_start();
                 var options = {
                     title: 'Twitch Viewers',
                     backgroundColor: '#303030', // Was #222222
+                    animation: {"startup": true, duration: 2000, easing: 'out'},
                     titleTextStyle: {
                         color: '#ffffff'
                     },
@@ -51,7 +52,7 @@ session_start();
                         position: 'none'
                     },
                     series: {
-                        0: {color: '#7555B1'}
+                        0: {color: '#7555B1'} // Purple color that was mixed between twitch dark purple and light purple.
                     }
                 };
 
@@ -63,8 +64,8 @@ session_start();
                 ]);
               });
 
-            var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-            chart.draw(data, options);
+                var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
             });
         }
         google.charts.load('current', {
@@ -191,60 +192,58 @@ session_start();
             <p>Get live stats on total number of viewers and streamers on twitch. Working on now makeing pages that show live stream
         data for a specified stream.</p>
         
-    <!--<iframe style="width: 350px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>//-->
-    <script>
+        <!--<iframe style="width: 350px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>//-->
+        <script>
 
-        function numberWithCommas(x)
-        {
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-    </script>
-    <br/>
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="col-md-8">
-                <div id="chart_div" style="width: 100%; height: 180px; overflow: show;"></div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Twitch Stats</h3>
-                        </div>
-                        <div class="panel-body">
-                            <script type="text/javascript">
-                                var twitchSummary = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams/summary"));
-                                var topGame = JSON.parse(httpGet("https://api.twitch.tv/kraken/games/top"));
-                                var topStream = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams"));
-                            </script>
-                            <ul class="list-unstyled">
-                                <li>Current Streamers:
-                                    <script type="text/javascript">
-                                        document.write(numberWithCommas(twitchSummary.channels));
-                                    </script>
-                                </li>
-                                <li>Current Viewers:
-                                    <script type="text/javascript">
-                                        document.write(numberWithCommas(twitchSummary.viewers));
-                                    </script>
-                                </li>
-                                <li>Top Game:
-                                    <script type="text/javascript">
-                                        document.write(topGame.top[0].game.name);
-                                    </script>
-                                </li>
-                                <li>Top Stream:
-                                    <script type="text/javascript">
-                                        document.write(topStream.streams[0].channel.display_name);
-                                    </script>
-                                </li>
-                            </ul>
-                            <script type="text/javascript">
-                            </script>
+            function numberWithCommas(x)
+            {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+        </script>
+        <br/>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="col-md-8">
+                    <div id="chart_div" style="width: 100%; height: 180px; overflow: show;"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Twitch Stats</h3>
+                            </div>
+                            <div class="panel-body">
+                                <script type="text/javascript">
+                                    var twitchSummary = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams/summary"));
+                                    var topGame = JSON.parse(httpGet("https://api.twitch.tv/kraken/games/top"));
+                                    var topStream = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams"));
+                                </script>
+                                <ul class="list-unstyled">
+                                    <li>Current Streamers:
+                                        <script type="text/javascript">
+                                            document.write(numberWithCommas(twitchSummary.channels));
+                                        </script>
+                                    </li>
+                                    <li>Current Viewers:
+                                        <script type="text/javascript">
+                                            document.write(numberWithCommas(twitchSummary.viewers));
+                                        </script>
+                                    </li>
+                                    <li>Top Game:
+                                        <script type="text/javascript">
+                                            document.write(topGame.top[0].game.name);
+                                        </script>
+                                    </li>
+                                    <li>Top Stream:
+                                        <script type="text/javascript">
+                                            document.write(topStream.streams[0].channel.display_name);
+                                        </script>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     
 
