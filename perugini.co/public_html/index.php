@@ -168,7 +168,7 @@ session_start();
             </div>
             <div class="collapse navbar-collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
-                    <li><a href="">Channels</a></li>
+                    <li><a href="channels/channels.php">Channels</a></li>
                     <li><a href="">Games</a></li>
                     <li><a href="about.php">About</a></li>
                 </ul>
@@ -266,23 +266,23 @@ session_start();
         </div>
     
 
-    <footer>
-        <div class="row">
-            <div class="col-lg-12">
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
 
-                <ul class="list-inline">
-                    <!--<li class="pull-right"><a href="#top">Back to top</a></li>-->
-                    <li><a href="www.twitch.tv">Twitch</a></li>
-                    <li><a href="https://twitter.com/peruginim">Twitter</a></li>
-                    <li><a href="https://github.com/peruginim">GitHub</a></li>
-                    <li><a href="https://github.com/justintv/Twitch-API">API</a></li>
-                </ul>
-                <p>Made by <a href="" rel="nofollow">Michael Perugini</a> with <a href="https://github.com/justintv/Twitch-API">Twitch API</a>. Contact him at <a href="">11peruginiM@gmail.com.</p>
-                <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>. Twitch font from <a href="http://www.dafont.com/dimitri.font">dafont</a>.</p>
+                    <ul class="list-inline">
+                        <!--<li class="pull-right"><a href="#top">Back to top</a></li>-->
+                        <li><a href="www.twitch.tv">Twitch</a></li>
+                        <li><a href="https://twitter.com/peruginim">Twitter</a></li>
+                        <li><a href="https://github.com/peruginim">GitHub</a></li>
+                        <li><a href="https://github.com/justintv/Twitch-API">API</a></li>
+                    </ul>
+                    <p>Made by <a href="" rel="nofollow">Michael Perugini</a> with <a href="https://github.com/justintv/Twitch-API">Twitch API</a>. Contact him at <a href="">11peruginiM@gmail.com.</p>
+                    <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>. Twitch font from <a href="http://www.dafont.com/dimitri.font">dafont</a>.</p>
 
+                </div>
             </div>
-        </div>
-    </footer>
-</div>
+        </footer>
+    </div>
 </body>
 </html>
