@@ -29,7 +29,7 @@ session_start();
                 var options = {
                     title: 'Twitch Viewers',
                     backgroundColor: '#303030', // Was #222222
-                    animation: {"startup": true, duration: 1500, easing: 'out'},
+                    animation: {"startup": true, duration: 1200, easing: 'out'},
                     titleTextStyle: {
                         color: '#ffffff'
                     },
@@ -67,6 +67,7 @@ session_start();
                 var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
                 //$('.progress').removeClass('progress-striped');
                 $('.progress').remove();
+                $('.chart_div').removeClass('hidden');
                 chart.draw(data, options);
             });
         }
@@ -122,7 +123,7 @@ session_start();
         $('.twitch-connect').click(function() {
             Twitch.login({
 				scope: ['user_read', 'channel_read'],
-				redirect_uri: 'http://perugini.co'
+				redirect_uri: 'http://localhost/perugini.co/Personal-Website/perugini.co/public_html/index.php#'
             });
         })
 
@@ -167,8 +168,8 @@ session_start();
             </div>
             <div class="collapse navbar-collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
-                    <li><a href="">Games</a></li>
                     <li><a href="">Channels</a></li>
+                    <li><a href="">Games</a></li>
                     <li><a href="about.php">About</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -176,6 +177,19 @@ session_start();
                         <a class="twitch-connect" href="#" style="font-family:'Dimitri'"><i class="fa fa-twitch"></i> Connect with Twitch</a>
                     </li>
                     <li class="authenticated hidden">
+                        <a id="welcome_user" href="#" style="font-family: 'Helvetica Neue'"> 
+                            <script>
+                                $(function() {
+                                    Twitch.api({
+                                        method: 'user'
+                                    }, function(error, user) {
+                                        document.getElementById("welcome_user").innerHTML = "<b>" + "Welcome " + user.display_name + "<b/>";
+                                    });
+                                });
+                            </script></a>
+                    </li>
+                    <li class="authenticated hidden">
+                        
                         <a class="twitch-logout" href="#" style="font-family:'Dimitri'"><i class="fa fa-sign-out"></i> Logout</a>
                     </li>
                 </ul>
@@ -206,11 +220,11 @@ session_start();
             <div class="container-fluid">
                 <div class="row-fluid">
                     <div class="col-md-8">
-                        <div class="progress progress-striped active" style="margin-top: 80px">
+                        <div class="progress progress-striped active" style="margin-top: 80px;">
                             <div class="graph_progress progress-bar" style="width: 100%"></div>
                         </div>
-                        <div id="chart_div" style="width: 100%; height: 180px; overflow: show;"></div>
-                        </div>
+                        <div id="chart_div" class="chart_div hidden" style="width: 100%; height: 180px; overflow: show;"></div>
+                    </div>
                     <div class="col-md-4">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
