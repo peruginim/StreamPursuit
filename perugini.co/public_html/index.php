@@ -18,7 +18,8 @@ session_start();
 
             var jsonData = $.ajax({
               url: 'https://data.sparkfun.com/output/' + public_key + '.json',
-              //data: {page: 1}
+              //data: {page: 1},
+              data: 'gt[timestamp]=now%20-1day',
               dataType: 'jsonp',
             }).done(function (results) {
                 var data = new google.visualization.DataTable();
