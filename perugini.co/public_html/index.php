@@ -272,7 +272,7 @@ session_start();
 
                     <ul class="list-inline">
                         <!--<li class="pull-right"><a href="#top">Back to top</a></li>-->
-                        <li><a href="www.twitch.tv">Twitch</a></li>
+                        <li><a href="http://twitch.tv">Twitch</a></li>
                         <li><a href="https://twitter.com/peruginim">Twitter</a></li>
                         <li><a href="https://github.com/peruginim">GitHub</a></li>
                         <li><a href="https://github.com/justintv/Twitch-API">API</a></li>
