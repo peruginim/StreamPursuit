@@ -99,13 +99,13 @@ session_start();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-                <a href="index.php" class="navbar-brand">TwitchDen</a>
+                <a href="../index.php" class="navbar-brand">TwitchDen<sup style="font-family:'Helvetica Neue'"><b>[Beta]</b></sup></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
-                    <li><a href="channels/channels.php">Channels</a></li>
+                    <li><a href="channels.php">Channels</a></li>
                     <li><a href="">Games</a></li>
-                    <li><a href="about.php">About</a></li>
+                    <li><a href="../about.php">About</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="authenticate hidden">
