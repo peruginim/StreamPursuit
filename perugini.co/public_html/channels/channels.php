@@ -105,7 +105,7 @@ session_start();
                 <ul class="nav navbar-nav">
                     <li><a href="channels/channels.php"><i class="fa fa-television"></i>Channels</a></li>
                     <li><a href=""><i class="fa fa-gamepad"></i>Games</a></li>
-                    <li><a href="about.php"><i class="fa fa-code"></i>About</a></li>
+                    <li><a href="../about.php"><i class="fa fa-code"></i>About</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="authenticate hidden">

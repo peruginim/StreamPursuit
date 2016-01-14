@@ -6,6 +6,12 @@ session_start();
 <head>
 	<title>Welcome to Perugini.co!</title>
 	<meta charset="UTF-8">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -28,39 +34,97 @@ session_start();
     <meta name="msapplication-TileImage" content="images/twitchicon.ico/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <script src="httpFunctions.js"></script>
+    <script>
+    window.CLIENT_ID = '2p0yndyzg3qjty0yfbywvngdgirwkev';
+    $(function() {
+        // Initialize. If we are already logged in, there is no
+        // need for the connect button
+        Twitch.init({
+            clientId: CLIENT_ID
+        }, function(error, status) {
+            if (status.authenticated) {
+                // we're logged in :)
+                $('.status input').val('Logged in! Allowed scope: ' + status.scope);
+                // Show the data for logged-in users
+                $('.authenticated').removeClass('hidden');
+            } else {
+                $('.status input').val('Not Logged in! Better connect with Twitch!');
+                // Show the twitch connect button
+                $('.authenticate').removeClass('hidden');
+            }
+        });
+
+
+        $('.twitch-connect').click(function() {
+            Twitch.login({
+				scope: ['user_read', 'channel_read'],
+				redirect_uri: 'http://localhost/perugini.co/Personal-Website/perugini.co/public_html/index.php#'
+            });
+        })
+
+        $('.twitch-logout').click(function() {
+            Twitch.logout();
+
+            // Reload page and reset url hash. You shouldn't
+            // need to do this.
+            window.location = window.location.pathname
+        })
+
+        $('#get-name button').click(function() {
+            Twitch.api({
+                method: 'user'
+            }, function(error, user) {
+                $('#get-name input').val(user.display_name);
+            });
+        })
+
+        $('#get-stream-key button').click(function() {
+            Twitch.api({
+                method: 'channel'
+            }, function(error, channel) {
+                $('#get-stream-key input').val(channel.stream_key);
+            });
+        })
+
+    });
+    </script>
 </head>
 <body>
-
     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
+        <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
-                <!--<span class="sr-only">Toggle navigation</span>-->
+                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-                <a href="index.php" class="navbar-brand">TwitchDen</a>
+                <a href="index.php" class="navbar-brand">TwitchDen<sup style="font-family:'Helvetica Neue'"><b>[Beta]</b></sup></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
-                    <li><a href="">Games</a></li>
-                    <li><a href="">Channels</a></li>
-                    <li><a href="about.php">About</a></li>
+                    <li><a href="channels/channels.php"><i class="fa fa-television"></i>Channels</a></li>
+                    <li><a href=""><i class="fa fa-gamepad"></i>Games</a></li>
+                    <li><a href="about.php"><i class="fa fa-code"></i>About</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <?php
-                            if(isset($_SESSION['username']))
-                            {
-                                echo "<a>Hi " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "!</a></li>";
-                                echo "<li><a href=\"login_and_register/logout.php\">Logout</a>";
-                            }
-                            else
-                            {
-                                echo "<a href=\"login_and_register/login.php\">Login/Register</a>";
-                            }
-                            ?>
+                    <li class="authenticate hidden">
+                        <a class="twitch-connect" href="#" style="font-family:'Dimitri'"><i class="fa fa-twitch"></i> Connect with Twitch</a>
+                    </li>
+                    <li class="authenticated hidden">
+                        <a id="welcome_user" href="#" style="font-family: 'Helvetica Neue'"> 
+                            <script>
+                                $(function() {
+                                    Twitch.api({
+                                        method: 'user'
+                                    }, function(error, user) {
+                                        document.getElementById("welcome_user").innerHTML = "<b>" + "Welcome " + user.display_name + "<b/>";
+                                    });
+                                });
+                            </script></a>
+                    </li>
+                    <li class="authenticated hidden">
+                        <a class="twitch-logout" href="#" style="font-family:'Dimitri'"><i class="fa fa-sign-out"></i> Logout</a>
                     </li>
                 </ul>
             </div>
@@ -91,7 +155,7 @@ session_start();
 
                 <ul class="list-inline">
                     <li class="pull-right"><a href="#top">Back to top</a></li>
-                    <li><a href="www.twitch.tv">Twitch</a></li>
+                    <li><a href="http://twitch.tv">Twitch</a></li>
                     <li><a href="https://twitter.com/peruginim">Twitter</a></li>
                     <li><a href="https://github.com/peruginim">GitHub</a></li>
                     <li><a href="https://github.com/justintv/Twitch-API">API</a></li>
