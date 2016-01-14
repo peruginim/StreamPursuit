@@ -205,7 +205,7 @@ session_start();
     <div class="container">
         <div class="jumbotron">
             <h1>Twitch Stats</h1>
-            <p>Get live stats on total number of viewers and streamers on twitch. Working on now makeing pages that show live stream
+            <p>Get live stats on total number of viewers and streamers on twitch. Working on now making pages that show live stream
         data for a specified stream.</p>
         
         <!--<iframe style="width: 350px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>//-->
