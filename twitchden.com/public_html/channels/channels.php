@@ -4,7 +4,7 @@ session_start();
 <!doctype html>
 <html lan="en">
 <head>
-    <title>Welcome to Perugini.co!</title>
+    <title>Welcome to TwitchDen!</title>
 	<meta charset="UTF-8">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -58,7 +58,7 @@ session_start();
         $('.twitch-connect').click(function() {
             Twitch.login({
 				scope: ['user_read', 'channel_read'],
-				redirect_uri: 'http://localhost/perugini.co/Personal-Website/perugini.co/public_html/index.php#'
+				redirect_uri: 'http://twitchden.com'
             });
         })
 
@@ -112,7 +112,7 @@ session_start();
                         <a class="twitch-connect" href="#" style="font-family:'Dimitri'"><i class="fa fa-twitch"></i> Connect with Twitch</a>
                     </li>
                     <li class="authenticated hidden">
-                        <a id="welcome_user" href="#" style="font-family: 'Helvetica Neue'"> 
+                        <a id="welcome_user" href="#" style="font-family: 'Helvetica Neue'">
                             <script>
                                 $(function() {
                                     Twitch.api({
@@ -124,19 +124,19 @@ session_start();
                             </script></a>
                     </li>
                     <li class="authenticated hidden">
-                        
+
                         <a class="twitch-logout" href="#" style="font-family:'Dimitri'"><i class="fa fa-sign-out"></i> Logout</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    
+
     <br/>
     <br/>
     <br/>
     <br/>
-    
+
     <div class="container">
         <div class="col-md-2"></div>
         <div class="col-md-8">
