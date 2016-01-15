@@ -228,7 +228,7 @@ session_start();
                     <div class="col-md-4">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Twitch Stats</h3>
+                                <h3 class="panel-title">Twitch Summary</h3>
                             </div>
                             <div class="panel-body">
                                 <script type="text/javascript">
