@@ -1,0 +1,2 @@
+parse error: Invalid numeric literal at line 1, column 20
+./datagrab.sh: line 9: [: !=: unary operator expected

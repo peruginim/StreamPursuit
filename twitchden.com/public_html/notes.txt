@@ -1,0 +1,81 @@
+-- Cusom Favicon Code --
+-- Add to head --
+
+<link rel="apple-touch-icon" sizes="57x57" href="webicons.ico/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="webicons.ico/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="webicons.ico/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="webicons.ico/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="webicons.ico/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="webicons.ico/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="webicons.ico/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="webicons.ico/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="webicons.ico/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="webicons.ico/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="webicons.ico/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="webicons.ico/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="webicons.ico/favicon-16x16.png">
+<link rel="manifest" href="webicons.ico/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="webicons.ico/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+brew services start mongodb
+
+command line: mongo
+
+start database?: mongodb
+
+left off on javascript #38
+
+sudo service mongod start / stop / restart
+
+Client ID: 2p0yndyzg3qjty0yfbywvngdgirwkev
+
+Streampoll.tv
+
+data.sparkfun.com info:
+Public URL
+
+http://data.sparkfun.com/streams/NJGqaM0GGbtRrOrd3DOd
+Public Key
+
+NJGqaM0GGbtRrOrd3DOd
+Private Key
+
+5d9g6jK99msWNdNJYBdJ
+Keep this key secret, and in a safe place.  You will not be able to retrieve it.
+
+Delete Key
+
+BpZOnw7ZZ9In535ake3a
+This key can only be used once.  Keep this key secret, and in a safe place.  You will not be able to retrieve it.
+
+Download Your Keys
+
+Download your keys as a JSON file.
+Keep this file secret and in a safe place.
+
+Logging using query string parameters
+Format:
+
+http://data.sparkfun.com/input/[publicKey]?private_key=[privateKey]&viewers=[value]
+Example:
+
+ http://data.sparkfun.com/input/NJGqaM0GGbtRrOrd3DOd?private_key=5d9g6jK99msWNdNJYBdJ&viewers=11.90
+If you would like to learn more about how to use data.sparkfun.com, please visit the documentation for more info.
+
+--- Script Notes ---
+
+Date Formating:
+date +"%T" // gives whole time
+date +"%H:%M" // gives hours & minutes
+
+Finding and killing background scripts:
+ps -u $USER | grep datagrab //or whatever script
+kill -KILL -20477 //-20477 being the PID number, will be different
+
+Running a script in the background:
+nohup [Script Here] & // eg: nohup ./datagrab.sh &
+
+--- Icon Packs to Remember ---
+evil-icons.io
