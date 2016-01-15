@@ -4,7 +4,7 @@ session_start();
 <!DOCTYPE HTML>
 <html lan="en">
 <head>
-	<title>Welcome to Perugini.co!</title>
+	<title>Welcome to TwitchDen!</title>
 	<meta charset="UTF-8">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -22,10 +22,10 @@ session_start();
             dataType: 'jsonp',
             }).done(function (results) {
                 var data = new google.visualization.DataTable();
-            
+
                 data.addColumn('datetime', 'Time');
                 data.addColumn('number', 'Viewers');
-                
+
                 var options = {
                     title: 'Twitch Viewers',
                     backgroundColor: '#303030', // Was #222222
@@ -123,7 +123,7 @@ session_start();
         $('.twitch-connect').click(function() {
             Twitch.login({
 				scope: ['user_read', 'channel_read'],
-				redirect_uri: 'http://localhost/perugini.co/Personal-Website/perugini.co/public_html/index.php#'
+				redirect_uri: 'http://twitchden.com'
             });
         })
 
@@ -177,7 +177,7 @@ session_start();
                         <a class="twitch-connect" href="#" style="font-family:'Dimitri'"><i class="fa fa-twitch"></i> Connect with Twitch</a>
                     </li>
                     <li class="authenticated hidden">
-                        <a id="welcome_user" href="#" style="font-family: 'Helvetica Neue'"> 
+                        <a id="welcome_user" href="#" style="font-family: 'Helvetica Neue'">
                             <script>
                                 $(function() {
                                     Twitch.api({
@@ -189,7 +189,7 @@ session_start();
                             </script></a>
                     </li>
                     <li class="authenticated hidden">
-                        
+
                         <a class="twitch-logout" href="#" style="font-family:'Dimitri'"><i class="fa fa-sign-out"></i> Logout</a>
                     </li>
                 </ul>
@@ -207,7 +207,7 @@ session_start();
             <h1>Twitch Stats</h1>
             <p>Get live stats on total number of viewers and streamers on twitch. Working on now making pages that show live stream
         data for a specified stream.</p>
-        
+
         <!--<iframe style="width: 350px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>//-->
         <script>
 
@@ -390,7 +390,7 @@ session_start();
                 </div>
             </div>
         </div>
-    
+
 
         <footer>
             <div class="row">
