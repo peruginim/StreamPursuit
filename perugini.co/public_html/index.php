@@ -263,6 +263,110 @@ session_start();
                     </div>
                 </div>
             </div>
+            <div class="container">
+                <div class="col-md-6">
+                    <table class="table table-striped table-hover" border="1">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Top 10 Games</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><script>document.write(topGame.top[0].game.name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><script>document.write(topGame.top[1].game.name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><script>document.write(topGame.top[2].game.name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><script>document.write(topGame.top[3].game.name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><script>document.write(topGame.top[4].game.name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td><script>document.write(topGame.top[5].game.name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td><script>document.write(topGame.top[6].game.name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td><script>document.write(topGame.top[7].game.name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td><script>document.write(topGame.top[8].game.name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td><script>document.write(topGame.top[9].game.name);</script></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table table-striped table-hover" border="1">
+                        <thead>
+                            <th>#</th>
+                            <th>Top 10 Streams</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><script>document.write(topStream.streams[0].channel.display_name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><script>document.write(topStream.streams[1].channel.display_name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><script>document.write(topStream.streams[2].channel.display_name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><script>document.write(topStream.streams[3].channel.display_name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><script>document.write(topStream.streams[4].channel.display_name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td><script>document.write(topStream.streams[5].channel.display_name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td><script>document.write(topStream.streams[6].channel.display_name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td><script>document.write(topStream.streams[7].channel.display_name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td><script>document.write(topStream.streams[8].channel.display_name);</script></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td><script>document.write(topStream.streams[9].channel.display_name);</script></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     
 
