@@ -270,48 +270,59 @@ session_start();
                             <tr>
                                 <th>#</th>
                                 <th>Top 10 Games</th>
+                                <th>Viewers</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
                                 <td><script>document.write(topGame.top[0].game.name);</script></td>
+                                <td><script>document.write(numberWithCommas(topGame.top[0].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td><script>document.write(topGame.top[1].game.name);</script></td>
+                                <td><script>document.write(numberWithCommas(topGame.top[1].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td><script>document.write(topGame.top[2].game.name);</script></td>
+                                <td><script>document.write(numberWithCommas(topGame.top[2].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td><script>document.write(topGame.top[3].game.name);</script></td>
+                                <td><script>document.write(numberWithCommas(topGame.top[3].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td><script>document.write(topGame.top[4].game.name);</script></td>
+                                <td><script>document.write(numberWithCommas(topGame.top[4].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>6</td>
                                 <td><script>document.write(topGame.top[5].game.name);</script></td>
+                                <td><script>document.write(numberWithCommas(topGame.top[5].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>7</td>
                                 <td><script>document.write(topGame.top[6].game.name);</script></td>
+                                <td><script>document.write(numberWithCommas(topGame.top[6].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>8</td>
                                 <td><script>document.write(topGame.top[7].game.name);</script></td>
+                                <td><script>document.write(numberWithCommas(topGame.top[7].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>9</td>
                                 <td><script>document.write(topGame.top[8].game.name);</script></td>
+                                <td><script>document.write(numberWithCommas(topGame.top[8].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>10</td>
                                 <td><script>document.write(topGame.top[9].game.name);</script></td>
+                                <td><script>document.write(numberWithCommas(topGame.top[9].viewers));</script></td>
                             </tr>
                         </tbody>
                     </table>
@@ -321,47 +332,58 @@ session_start();
                         <thead>
                             <th>#</th>
                             <th>Top 10 Streams</th>
+                            <th>Viewers</th>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
                                 <td><script>document.write(topStream.streams[0].channel.display_name);</script></td>
+                                <td><script>document.write(numberWithCommas(topStream.streams[0].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td><script>document.write(topStream.streams[1].channel.display_name);</script></td>
+                                <td><script>document.write(numberWithCommas(topStream.streams[1].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td><script>document.write(topStream.streams[2].channel.display_name);</script></td>
+                                <td><script>document.write(numberWithCommas(topStream.streams[2].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td><script>document.write(topStream.streams[3].channel.display_name);</script></td>
+                                <td><script>document.write(numberWithCommas(topStream.streams[3].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td><script>document.write(topStream.streams[4].channel.display_name);</script></td>
+                                <td><script>document.write(numberWithCommas(topStream.streams[4].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>6</td>
                                 <td><script>document.write(topStream.streams[5].channel.display_name);</script></td>
+                                <td><script>document.write(numberWithCommas(topStream.streams[5].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>7</td>
                                 <td><script>document.write(topStream.streams[6].channel.display_name);</script></td>
+                                <td><script>document.write(numberWithCommas(topStream.streams[6].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>8</td>
                                 <td><script>document.write(topStream.streams[7].channel.display_name);</script></td>
+                                <td><script>document.write(numberWithCommas(topStream.streams[7].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>9</td>
                                 <td><script>document.write(topStream.streams[8].channel.display_name);</script></td>
+                                <td><script>document.write(numberWithCommas(topStream.streams[8].viewers));</script></td>
                             </tr>
                             <tr>
                                 <td>10</td>
                                 <td><script>document.write(topStream.streams[9].channel.display_name);</script></td>
+                                <td><script>document.write(numberWithCommas(topStream.streams[9].viewers));</script></td>
                             </tr>
                         </tbody>
                     </table>
