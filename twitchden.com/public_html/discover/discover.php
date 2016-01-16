@@ -139,28 +139,21 @@ session_start();
     <br/>
 
     <div class="container">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <div class="well well-lg">
+        <div class="jumbotron">
+            <h1>Discover</h1>
+            <p>Jump in and find a random stream!</p>
+            <!--<div class="well well-lg">
                 <form class="form-horizontal">
                     <fieldset>
                         <legend>Discover</legend>
-                        <p class="text-muted">Find and join a random stream.</p>
+                        <p class="text-muted">Jump in and find a random stream!</p>
                         <br/>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                <input type="text" class="form-control" placeholder="Channel Name">
-                                <span class="input-group-btn">
-                                  <button class="btn btn-default" type="button">Search</button>
-                                </span>
-                              </div>
-                        </div>
+                        <a class="btn btn-primary btn-lg"><i class="fa fa-random"></i>Random</a>
                     </fieldset>
                 </form>
-            </div>
+            </div>-->
+            <a href="#" class="btn btn-primary btn-lg btn-block"><i class="fa fa-random"></i>Random</a>
         </div>
-        <div class="col-md-2"></div>
     </div>
     <div class="container">
         <footer>
