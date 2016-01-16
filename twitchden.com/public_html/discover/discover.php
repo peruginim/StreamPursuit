@@ -144,8 +144,8 @@ session_start();
             <div class="well well-lg">
                 <form class="form-horizontal">
                     <fieldset>
-                        <legend>Channel Search</legend>
-                        <p class="text-muted">Enter a channel name to get live stream stats.</p>
+                        <legend>Discover</legend>
+                        <p class="text-muted">Find and join a random stream.</p>
                         <br/>
                         <div class="form-group">
                             <div class="input-group">
