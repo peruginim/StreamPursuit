@@ -104,6 +104,7 @@ session_start();
             <div class="collapse navbar-collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
                     <li><a href="channels/channels.php"><i class="fa fa-television"></i>Channels</a></li>
+                    <li class="authenticated hidden"><a href="discover/discover.php"><i class="fa fa-binoculars"></i>Discover</a></li>
                     <li><a href=""><i class="fa fa-gamepad"></i>Games</a></li>
                     <li><a href="about.php"><i class="fa fa-code"></i>About</a></li>
                 </ul>
