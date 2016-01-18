@@ -152,7 +152,7 @@ session_start();
                     </fieldset>
                 </form>
             </div>-->
-            <a href="#" class="btn btn-primary btn-lg btn-block"><i class="fa fa-random"></i>Random</a>
+            <a href="stream.php" class="btn btn-primary btn-lg btn-block"><i class="fa fa-random"></i>Random</a>
         </div>
     </div>
     <div class="container">
