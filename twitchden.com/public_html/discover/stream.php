@@ -13,6 +13,7 @@ session_start();
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../httpFunctions.js"></script>
+    <script src="../utilityFunctions.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
@@ -139,11 +140,14 @@ session_start();
     <br/>
 
     <div class="container">
-        <div class="jumbotron">
-            <h1>Discover</h1>
-            <p>Jump in and find a random stream!</p>
-            <a href="#" class="btn btn-primary btn-lg btn-block"><i class="fa fa-random"></i>Random</a>
-        </div>
+        <script>
+            var gamesList = JSON.parse(httpGet("https://api.twitch.tv/kraken/games/top?limit=100"));
+            var gameCount = gamesList.top.length;
+            var gameIndex = getRandomInt(0, gameCount);
+            // Need to replace all spaces with %20's for query.
+            var streamsList = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams?game=" + gamesList.top[game].game.name + "&limit=100")); // This wont work right now because game.name needs to be sanitized.
+        </script>
+       	<h1 class="broadcast-title">Broadcast Title</h1>
     </div>
     <div class="container">
         <footer>
