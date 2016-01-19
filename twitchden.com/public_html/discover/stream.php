@@ -144,17 +144,68 @@ session_start();
             var gamesList = JSON.parse(httpGet("https://api.twitch.tv/kraken/games/top?limit=100"));
             var gameCount = gamesList.top.length;
             var gameIndex = getRandomInt(0, gameCount);
-            // Need to replace all spaces with %20's for query.
-            var streamsList = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams?game=" + gamesList.top[game].game.name + "&limit=100")); // This wont work right now because game.name needs to be sanitized.
+            var game = sanitizeGame(gamesList.top[gameIndex].game.name);
+            var streamsList = JSON.parse(httpGet("https://api.twitch.tv/kraken/streams?game=" + game + "&limit=100"));
+            var streamCount = streamsList.streams.length;
+            var streamIndex = getRandomInt(0, streamCount);
+            var streamerName = streamsList.streams[streamIndex].channel.name;
         </script>
-       	<h1 class="broadcast-title">Broadcast Title</h1>
+        <div class="container">
+            <div class="row no-gutter">
+                <div class="col-md-1">
+                    <center>
+                    <script>document.write("<img src =" + streamsList.streams[streamIndex].channel.logo + " style=\"width:60px;height:60px;\">");</script>
+                   </center>
+                </div>
+                <div class="col-md-10">
+                    <div class="title">
+                        <font size="5"><script>document.write(streamsList.streams[streamIndex].channel.status);</script></font>
+                    </div>
+                    <div class="channel">
+                        <script>
+                            document.write("<a href=\"http://www.twitch.tv/"
+                                           + streamerName + "/profile\">" + streamsList.streams[streamIndex].channel.display_name
+                                           + "</a> playing <a href=\"http://twitch.tv/directory/game/" + game + "\">"
+                                           + streamsList.streams[streamIndex].channel.game + "</a>");
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <script>
+                        document.write("<iframe src=\"http://player.twitch.tv/?channel="
+                                       + streamerName + "\" height=\"500\" width=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen muted=\"true\"> </iframe>");
+                    </script>
+                </div>
+                <div class="col-md-3">
+                    <script>
+                        document.write("<iframe frameborder=\"0\" scrolling=\"no\" id=\"chat_embed\" src=\"http://www.twitch.tv/"
+                                      + streamerName + "/chat\" height=\"500\" width=\"100%\"> </iframe>");
+                    </script>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="#" class="btn btn-primary btn-lg btn-block"><i class="fa fa-check"></i> Like</a>
+                </div>
+                <div class="col-md-4">
+                    <a href="stream.php" class="btn btn-primary btn-lg btn-block"><i class="fa fa-repeat"></i> ReRoll</a>
+                </div>
+                <div class="col-md-4">
+                    <a href="#" class="btn btn-primary btn-lg btn-block"><i class="fa fa-heart"></i> Follow</a>
+                </div>
+            </div>
+            <br/>
+            <p class="text-muted">To watch this channel on Twitch, click <script>document.write("<a href=" + streamsList.streams[streamIndex].channel.url + ">here</a>");</script>!</p>
+        </div>
     </div>
+    <br/>
     <div class="container">
         <footer>
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="list-inline">
-                        <!--<li class="pull-right"><a href="#top">Back to top</a></li>-->
                         <li><a href="www.twitch.tv">Twitch</a></li>
                         <li><a href="https://twitter.com/peruginim">Twitter</a></li>
                         <li><a href="https://github.com/peruginim">GitHub</a></li>
