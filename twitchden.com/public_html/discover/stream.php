@@ -187,13 +187,13 @@ session_start();
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <a href="#" class="btn btn-primary btn-lg btn-block"><i class="fa fa-check"></i> Like</a>
+                    <a href="#" class="btn btn-primary btn-lg btn-block" id="like-button"><i class="fa fa-check"></i> Like</a>
                 </div>
                 <div class="col-md-4">
-                    <a href="stream.php" class="btn btn-primary btn-lg btn-block"><i class="fa fa-repeat"></i> ReRoll</a>
+                    <a href="stream.php" class="btn btn-primary btn-lg btn-block" id="reroll-button"><i class="fa fa-repeat"></i> ReRoll</a>
                 </div>
                 <div class="col-md-4">
-                    <a href="#" class="btn btn-primary btn-lg btn-block"><i class="fa fa-heart"></i> Follow</a>
+                    <a href="#" class="btn btn-primary btn-lg btn-block"><i class="fa fa-heart" id="follow-button"></i> Follow</a>
                 </div>
             </div>
             <br/>
