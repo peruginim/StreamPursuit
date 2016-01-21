@@ -58,7 +58,7 @@ session_start();
 
         $('.twitch-connect').click(function() {
             Twitch.login({
-				scope: ['user_read', 'channel_read'],
+				scope: ['user_read', 'channel_read', 'user_follows_edit'],
 				redirect_uri: 'http://localhost/perugini.co/TwitchDen/twitchden.com/public_html/index.php'
             });
         })
