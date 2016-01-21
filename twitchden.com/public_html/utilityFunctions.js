@@ -91,7 +91,7 @@ function follow(channel)
     var success = function()
     {
         // Change color of button to green and change 'Follow' to 'Followed'
-        document.getElementById("follow-button").innerHTML = "Followed";
+        document.getElementById("follow-button").innerHTML = "<i class=\"fa fa-heart\"></i> Followed";
         document.getElementById("follow-button").className = "btn btn-success btn-lg btn-block";
         document.getElementById("follow-button").removeAttribute("onclick");
     }
