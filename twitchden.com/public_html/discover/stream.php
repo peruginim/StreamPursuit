@@ -9,7 +9,8 @@ session_start();
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="//code.jquery.com/jquery.min.js"></script>
-    <script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
+    <!--<script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>-->
+    <script src="../js/twitch.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../httpFunctions.js"></script>
@@ -59,7 +60,7 @@ session_start();
         $('.twitch-connect').click(function() {
             Twitch.login({
 				scope: ['user_read', 'channel_read'],
-				redirect_uri: 'http://twitchden.com'
+				redirect_uri: 'http://localhost/perugini.co/TwitchDen/twitchden.com/public_html/index.php'
             });
         })
 
@@ -104,9 +105,7 @@ session_start();
             </div>
             <div class="collapse navbar-collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
-                    <li><a href="../channels/channels.php"><i class="fa fa-television"></i>Channels</a></li>
-                    <li class="authenticated hidden"><a href="discover.php"><i class="fa fa-binoculars"></i>Discover</a></li>
-                    <li><a href=""><i class="fa fa-gamepad"></i>Games</a></li>
+                    <li><a href="discover.php"><i class="fa fa-binoculars"></i>Discover</a></li>
                     <li><a href="../about.php"><i class="fa fa-code"></i>About</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -193,7 +192,7 @@ session_start();
                     <a href="stream.php" class="btn btn-primary btn-lg btn-block" id="reroll-button"><i class="fa fa-repeat"></i> ReRoll</a>
                 </div>
                 <div class="col-md-4">
-                    <a href="#" class="btn btn-primary btn-lg btn-block"><i class="fa fa-heart" id="follow-button"></i> Follow</a>
+                    <a href="#" class="btn btn-primary btn-lg btn-block" id="follow-button" onclick="follow(streamerName)"><i class="fa fa-heart"></i> Follow</a>
                 </div>
             </div>
             <br/>
