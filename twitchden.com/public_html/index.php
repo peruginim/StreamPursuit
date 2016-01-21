@@ -9,7 +9,8 @@ session_start();
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="//code.jquery.com/jquery.min.js"></script>
-    <script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
+    <!--<script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>-->
+    <script src="js/twitch.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         function drawChart() {
@@ -169,9 +170,7 @@ session_start();
             </div>
             <div class="collapse navbar-collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
-                    <li><a href="channels/channels.php"><i class="fa fa-television"></i>Channels</a></li>
-                    <li class="authenticated hidden"><a href="discover/discover.php"><i class="fa fa-binoculars"></i>Discover</a></li>
-                    <li><a href=""><i class="fa fa-gamepad"></i>Games</a></li>
+                    <li><a href="discover/discover.php"><i class="fa fa-binoculars"></i>Discover</a></li>
                     <li><a href="about.php"><i class="fa fa-code"></i>About</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
