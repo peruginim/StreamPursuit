@@ -103,9 +103,7 @@ session_start();
             </div>
             <div class="collapse navbar-collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
-                    <li><a href="channels/channels.php"><i class="fa fa-television"></i>Channels</a></li>
-                    <li class="authenticated hidden"><a href="discover/discover.php"><i class="fa fa-binoculars"></i>Discover</a></li>
-                    <li><a href=""><i class="fa fa-gamepad"></i>Games</a></li>
+                    <li><a href="discover/discover.php"><i class="fa fa-binoculars"></i>Discover</a></li>
                     <li><a href="about.php"><i class="fa fa-code"></i>About</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -143,10 +141,9 @@ session_start();
             <h3 class="panel-title">About TwitchDen</h3>
         </div>
         <div class="panel-body">
-            <p>TwitchDen is a website I wanted to create to learn and brush up on web development from the ground up. I wanted to remember how to launch and set up a VPS, get apache, mongodb, git, etc set up, and to re-learn php. So far I've used php to set up the bulk of the site. It's handeling user login/logout right now (not that it's very useful right now).</p>
-            <p>My goal for this site is to do some cool stuff with the Twitch API, like show stats such as current viewcount and streamcount. I want to be able to display live graphs/stats on twitch streams to show viewship over time. I think that'll be a pretty cool thing that would interest a lot of people, not just viewers. I'd also really like to make this more of a social space, where people can link their twitch accounts to their site accounts, add friends to their on-site account, and follow what their friends are watching. I'd like people to be able to find what channels their friends are following, what their friends are watching right now, and be able to share streams or talk about them in some way (not 100% sure about the last one).</p>
-            <p>I think that twitch's api provides a lot of cool data that viewers usually don't get to see unless the broadcaster has some bot that allows them to type in commands. I know that there's a way to find how long a broadcaster has been streaming, and I'd like to maybe collect that data over time to show average stream time, and maybe auto-generate schedules for that time. What I mean by that is to gather start and end times, get the average start and average end time, and be able to display that information as a "Predicted Start Time: 12:30 PST" "Predicted Stream Length: 4 Hours" or something like that.</p>
-            <p>I have a lot of learning to do, like learning how to integrate twitch accounts with site accounts, but I think I could make this site into something people would actually use.</p>
+            <p>TwitchDen is a website I wanted to create to learn and brush up on web development from the ground up. I wanted to remember how to launch and set up a VPS, get apache, mongodb, git, etc set up, and to re-learn php.</p>
+            <p>My goal for this site is to do some cool stuff with the Twitch API. I originally wanted to make the site into a useful stream performance monitoring tool that would graph live video metrics (pretty much like the Video Stats feature on the Twitch Video Player), but I wansn't able to find an elegant solution for grabbing that sort of data. I think it is possible but might take a very large amount of work because you'd basically have to continuously grab video segments from twitch, analyze them, and graph the results. I thought it would be cooler if I just make something like Pandora for Twitch. I wanted to provide a way for people to explore some Twitch Channels that they never would have visited by just browsing the site.</p>
+            <p>In the future I want to make a more robust random search with multiple options (specify a game, specify a language, etc) which should be pretty straight-forward.</p>
         </div>
     </div>
 
@@ -155,7 +152,6 @@ session_start();
             <div class="col-lg-12">
 
                 <ul class="list-inline">
-                    <li class="pull-right"><a href="#top">Back to top</a></li>
                     <li><a href="http://twitch.tv">Twitch</a></li>
                     <li><a href="https://twitter.com/peruginim">Twitter</a></li>
                     <li><a href="https://github.com/peruginim">GitHub</a></li>
