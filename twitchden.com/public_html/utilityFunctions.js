@@ -94,6 +94,7 @@ function follow(channel)
         document.getElementById("follow-button").innerHTML = "<i class=\"fa fa-heart\"></i> Followed";
         document.getElementById("follow-button").className = "btn btn-success btn-lg btn-block";
         document.getElementById("follow-button").removeAttribute("onclick");
+        //document.getElementById("follow-button").onclick = unFollow(channel);
     }
     var failure = function(step)
     {
@@ -112,6 +113,41 @@ function follow(channel)
             if(error) return failure("2");
 
             Twitch.api({verb: 'PUT', method: 'users/' + user.name + '/follows/channels/' + channel}, function(error, response)
+            {
+                if(error) return failure(user.name);
+                success();
+            });
+        });
+    });
+}
+
+function unFollow(channel)
+{
+    var success = function()
+    {
+        // Change color of button to green and change 'Follow' to 'Followed'
+        document.getElementById("follow-button").innerHTML = "<i class=\"fa fa-heart\"></i> Follow";
+        document.getElementById("follow-button").className = "btn btn-primary btn-lg btn-block";
+        document.getElementById("follow-button").removeAttribute("onclick");
+        //document.getElementById("follow-button").onclick = follow(channel);
+    }
+    var failure = function(step)
+    {
+        // Popup saying 'Something broke, make sure you're logged into twitch.'
+        var token = Twitch.getToken();
+        window.alert("Something went wrong at step: " + token);
+    }
+
+    Twitch.getStatus(function(error, status)
+    {
+        if(error) return failure("1");
+        if(!status.authenticated) return failure("-1");
+
+        Twitch.api({method: 'user'}, function(error, user)
+        {
+            if(error) return failure("2");
+
+            Twitch.api({verb: 'DELETE', method: 'users/' + user.name + '/follows/channels/' + channel}, function(error, response)
             {
                 if(error) return failure(user.name);
                 success();
