@@ -9,7 +9,8 @@ session_start();
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="//code.jquery.com/jquery.min.js"></script>
-    <script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
+    <!--<script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>-->
+    <script src="../js/twitch.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../httpFunctions.js"></script>
@@ -58,7 +59,7 @@ session_start();
         $('.twitch-connect').click(function() {
             Twitch.login({
 				scope: ['user_read', 'channel_read'],
-				redirect_uri: 'http://twitchden.com'
+				redirect_uri: 'http://localhost/perugini.co/TwitchDen/twitchden.com/public_html/index.php'
             });
         })
 
@@ -103,9 +104,7 @@ session_start();
             </div>
             <div class="collapse navbar-collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
-                    <li><a href="../channels/channels.php"><i class="fa fa-television"></i>Channels</a></li>
-                    <li class="authenticated hidden"><a href="discover.php"><i class="fa fa-binoculars"></i>Discover</a></li>
-                    <li><a href=""><i class="fa fa-gamepad"></i>Games</a></li>
+                    <li><a href="discover.php"><i class="fa fa-binoculars"></i>Discover</a></li>
                     <li><a href="../about.php"><i class="fa fa-code"></i>About</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -139,7 +138,12 @@ session_start();
     <br/>
 
     <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron authenticate hidden">
+            <h1>Discover</h1>
+            <p>Discover lets you jump right into Twitch by hooking you up with a random stream. <br/><br/>Like what you see? Hit Like to give them a thumbs up, save that stream in a list of liked streams, and show some love by given them points on the Leaderboard! <br/><br/>Can't get enough? Hit Follow to add them to your Twitch followed streams! <br/><br/>Maybe you want to move on to the next awesome stream? Hit ReRoll and a shiny new channel will by layed out before your very eyes. <br/><br/></p><h2>Connect with Twitch to continue!</h2>
+            <a href="#" class="btn btn-primary btn-lg btn-block"><i class="fa fa-random"></i> Random</a>
+        </div>
+        <div class="jumbotron authenticated hidden">
             <h1>Discover</h1>
             <p>Jump in and find a random stream!</p>
             <!--<div class="well well-lg">
@@ -152,7 +156,7 @@ session_start();
                     </fieldset>
                 </form>
             </div>-->
-            <a href="stream.php" class="btn btn-primary btn-lg btn-block"><i class="fa fa-random"></i>Random</a>
+            <a href="stream.php" class="btn btn-primary btn-lg btn-block"><i class="fa fa-random"></i> Random</a>
         </div>
     </div>
     <div class="container">
