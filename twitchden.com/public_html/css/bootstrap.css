@@ -1114,7 +1114,7 @@ a {
 }
 a:hover,
 a:focus {
-  color: #0ce3ac;
+  color: #B9A3E3;
   text-decoration: underline;
 }
 a:focus {
@@ -7003,7 +7003,7 @@ textarea:focus {
 .pager .disabled > a:hover,
 .pager .disabled > a:focus,
 .pager .disabled > span {
-  background-color: #007053;
+  background-color: #B9A3E3;
 }
 .breadcrumb a {
   color: #fff;
