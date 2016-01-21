@@ -79,3 +79,6 @@ nohup [Script Here] & // eg: nohup ./datagrab.sh &
 
 --- Icon Packs to Remember ---
 evil-icons.io
+
+
+Holy shit MitchPls is the best emote.
