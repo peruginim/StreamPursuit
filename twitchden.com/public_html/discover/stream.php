@@ -45,12 +45,9 @@ session_start();
             clientId: CLIENT_ID
         }, function(error, status) {
             if (status.authenticated) {
-                // we're logged in :)
-                $('.status input').val('Logged in! Allowed scope: ' + status.scope);
                 // Show the data for logged-in users
                 $('.authenticated').removeClass('hidden');
             } else {
-                $('.status input').val('Not Logged in! Better connect with Twitch!');
                 // Show the twitch connect button
                 $('.authenticate').removeClass('hidden');
             }
@@ -59,7 +56,7 @@ session_start();
 
         $('.twitch-connect').click(function() {
             Twitch.login({
-				scope: ['user_read', 'channel_read'],
+				scope: ['user_read', 'channel_read', 'user_follows_edit'],
 				redirect_uri: 'http://localhost/perugini.co/TwitchDen/twitchden.com/public_html/index.php'
             });
         })
@@ -70,22 +67,6 @@ session_start();
             // Reload page and reset url hash. You shouldn't
             // need to do this.
             window.location = window.location.pathname
-        })
-
-        $('#get-name button').click(function() {
-            Twitch.api({
-                method: 'user'
-            }, function(error, user) {
-                $('#get-name input').val(user.display_name);
-            });
-        })
-
-        $('#get-stream-key button').click(function() {
-            Twitch.api({
-                method: 'channel'
-            }, function(error, channel) {
-                $('#get-stream-key input').val(channel.stream_key);
-            });
         })
 
     });
