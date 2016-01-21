@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>twitch.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+
+    <ul class="sections">
+
+          <li id="title">
+              <div class="annotation">
+                  <h1>twitch.js</h1>
+              </div>
+          </li>
+
+
+
+        <li id="section-1">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h2 id="core">Core</h2>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>;(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$</span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-2">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Wait five seconds for the API request before timing out.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> REQUEST_TIMEOUT = <span class="hljs-number">5000</span>;
+  <span class="hljs-keyword">var</span> HTTP_CODES = {
+    unauthorized: <span class="hljs-number">401</span>
+  };
+
+  <span class="hljs-keyword">var</span> Twitch = {
+    $: $,
+    baseUrl: <span class="hljs-string">'https://api.twitch.tv/kraken/'</span>,
+    _config: {},
+    extend: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">src</span>) </span>{
+      $.extend(Twitch, src);
+    }
+  };</pre></div></div>
+
+        </li>
+
+
+        <li id="section-3">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Perform requests to the TwitchTV API. This is a fairly low-level
+interface, so most clients are better served by using a related
+high-level function if one exists.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>  Twitch.api = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options, callback</span>) </span>{
+    <span class="hljs-keyword">if</span> (!Twitch._config.session) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'You must call init() before api()'</span>);
+    }
+    <span class="hljs-keyword">var</span> params = options.params || {};
+    callback = callback || <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{};
+
+    <span class="hljs-keyword">var</span> authenticated = !!Twitch._config.session.token,
+      url = Twitch.baseUrl + (options.url || options.method || <span class="hljs-string">''</span>);
+
+    <span class="hljs-keyword">if</span> (authenticated) params.oauth_token = Twitch._config.session.token;
+    <span class="hljs-keyword">if</span> (options.verb) params._method = options.verb;</pre></div></div>
+
+        </li>
+
+
+        <li id="section-4">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>When using JSONP, any error response will have a
+<code>200</code> HTTP status code with the actual code in the body
+so we can parse them.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    $.ajax({
+      url: url + <span class="hljs-string">'?'</span> + $.param(params),
+      dataType: <span class="hljs-string">'jsonp'</span>,
+      timeout : REQUEST_TIMEOUT
+    })
+    .done(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-5">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>204 No Content has no data object</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>      Twitch.log(<span class="hljs-string">'Response Data:'</span>, data);
+      <span class="hljs-keyword">if</span> ( !(data &amp;&amp; data.error) ) {
+        callback(<span class="hljs-literal">null</span>, data || <span class="hljs-literal">null</span>);
+        <span class="hljs-keyword">return</span>;
+      }
+
+      Twitch.log(<span class="hljs-string">'API Error:'</span>, data.error + <span class="hljs-string">';'</span>, data.message);
+      <span class="hljs-keyword">if</span> (authenticated &amp;&amp; data.status === HTTP_CODES.unauthorized) {</pre></div></div>
+
+        </li>
+
+
+        <li id="section-6">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Invalid authentication code; destroy our session.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>        Twitch.logout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+          callback(data, <span class="hljs-literal">null</span>);
+        });
+      } <span class="hljs-keyword">else</span> {
+        callback(data, <span class="hljs-literal">null</span>);
+      }
+    })
+    .fail(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-7">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Forced fail by request timeout; we have no
+way of knowing the actual error with JSONP.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Request Timeout'</span>), <span class="hljs-literal">null</span>);
+    });
+  };</pre></div></div>
+
+        </li>
+
+
+        <li id="section-8">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Log messages to the browser console if available, prefixed
+with <code>[Twitch]</code>.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>  Twitch.log = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message</span>) </span>{
+    <span class="hljs-built_in">Array</span>.prototype.unshift.call(<span class="hljs-built_in">arguments</span>, <span class="hljs-string">'[Twitch]'</span>);
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.console) {
+      <span class="hljs-built_in">console</span>.log.apply(<span class="hljs-built_in">console</span>, <span class="hljs-built_in">arguments</span>);
+    }
+  };
+
+  <span class="hljs-built_in">window</span>.Twitch = Twitch;</pre></div></div>
+
+        </li>
+
+
+        <li id="section-9">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Support either <a href="http://jquery.com">jQuery</a> or <a href="http://zeptojs.com">Zepto</a>.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>})(<span class="hljs-built_in">window</span>.jQuery || <span class="hljs-built_in">window</span>.Zepto);</pre></div></div>
+
+        </li>
+
+
+        <li id="section-10">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <h2 id="storage">Storage</h2>
+<p>Persistence layer for the SDK on top of sessionStorage, with
+a cookie fallback for older browsers.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-11">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Adapted from remy’s <a href="https://gist.github.com/350433">DOM storage polyfill</a>.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>
+  <span class="hljs-keyword">var</span> store = <span class="hljs-built_in">window</span>.sessionStorage;
+
+  <span class="hljs-keyword">if</span> (!store) {
+    (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">var</span> Storage = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">type</span>) </span>{
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createCookie</span>(<span class="hljs-params">name, value, days</span>) </span>{
+          <span class="hljs-keyword">var</span> date, expires;
+
+          <span class="hljs-keyword">if</span> (days) {
+            date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
+            date.setTime(date.getTime()+(days*<span class="hljs-number">24</span>*<span class="hljs-number">60</span>*<span class="hljs-number">60</span>*<span class="hljs-number">1000</span>));
+            expires = <span class="hljs-string">"; expires="</span>+date.toGMTString();
+          } <span class="hljs-keyword">else</span> {
+            expires = <span class="hljs-string">""</span>;
+          }
+          <span class="hljs-built_in">document</span>.cookie = name+<span class="hljs-string">"="</span>+value+expires+<span class="hljs-string">"; path=/"</span>;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">readCookie</span>(<span class="hljs-params">name</span>) </span>{
+          <span class="hljs-keyword">var</span> nameEQ = name + <span class="hljs-string">"="</span>,
+              ca = <span class="hljs-built_in">document</span>.cookie.split(<span class="hljs-string">';'</span>),
+              i, c;
+
+          <span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>; i &lt; ca.length; i++) {
+            c = ca[i];
+            <span class="hljs-keyword">while</span> (c.charAt(<span class="hljs-number">0</span>)==<span class="hljs-string">' '</span>) {
+              c = c.substring(<span class="hljs-number">1</span>,c.length);
+            }
+
+            <span class="hljs-keyword">if</span> (c.indexOf(nameEQ) === <span class="hljs-number">0</span>) {
+              <span class="hljs-keyword">return</span> c.substring(nameEQ.length,c.length);
+            }
+          }
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setData</span>(<span class="hljs-params">data</span>) </span>{
+          data = <span class="hljs-built_in">JSON</span>.stringify(data);
+          <span class="hljs-keyword">if</span> (type == <span class="hljs-string">'session'</span>) {
+            <span class="hljs-built_in">window</span>.name = data;
+          } <span class="hljs-keyword">else</span> {
+            createCookie(<span class="hljs-string">'localStorage'</span>, data, <span class="hljs-number">365</span>);
+          }
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">clearData</span>(<span class="hljs-params"></span>) </span>{
+          <span class="hljs-keyword">if</span> (type == <span class="hljs-string">'session'</span>) {
+            <span class="hljs-built_in">window</span>.name = <span class="hljs-string">''</span>;
+          } <span class="hljs-keyword">else</span> {
+            createCookie(<span class="hljs-string">'localStorage'</span>, <span class="hljs-string">''</span>, <span class="hljs-number">365</span>);
+          }
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getData</span>(<span class="hljs-params"></span>) </span>{
+          <span class="hljs-keyword">var</span> data = type == <span class="hljs-string">'session'</span> ? <span class="hljs-built_in">window</span>.name : readCookie(<span class="hljs-string">'localStorage'</span>);
+          <span class="hljs-keyword">return</span> data ? <span class="hljs-built_in">JSON</span>.parse(data) : {};
+        }</pre></div></div>
+
+        </li>
+
+
+        <li id="section-12">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>initialise if there’s already data</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> data = getData();
+
+        <span class="hljs-keyword">return</span> {
+          length: <span class="hljs-number">0</span>,
+          clear: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+            data = {};
+            <span class="hljs-keyword">this</span>.length = <span class="hljs-number">0</span>;
+            clearData();
+          },
+          getItem: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key</span>) </span>{
+            <span class="hljs-keyword">return</span> data[key] === <span class="hljs-literal">undefined</span> ? <span class="hljs-literal">null</span> : data[key];
+          },
+          key: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">i</span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-13">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>not perfect, but works</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> ctr = <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k <span class="hljs-keyword">in</span> data) {
+              <span class="hljs-keyword">if</span> (ctr == i) {
+                <span class="hljs-keyword">return</span> k;
+              } <span class="hljs-keyword">else</span> {
+                ctr++;
+              }
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+          },
+          removeItem: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key</span>) </span>{
+            <span class="hljs-keyword">delete</span> data[key];
+            <span class="hljs-keyword">this</span>.length--;
+            setData(data);
+          },
+          setItem: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key, value</span>) </span>{
+            data[key] = value+<span class="hljs-string">''</span>; <span class="hljs-comment">// forces the value to a string</span>
+            <span class="hljs-keyword">this</span>.length++;
+            setData(data);
+          }
+        };
+      };
+
+      store = <span class="hljs-keyword">new</span> Storage(<span class="hljs-string">'session'</span>);
+    })();
+  }
+
+  Twitch.extend({
+    _storage: store
+  });
+
+})();</pre></div></div>
+
+        </li>
+
+
+        <li id="section-14">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <h2 id="initialization">Initialization</h2>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-15">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Initialize the library.</p>
+<p>Accepts an options object specifying
+your appplication’s <strong>client id</strong>, recieved after
+app creation on TwitchTV.</p>
+<p>Typical initialization:</p>
+<pre><code>&lt;script&gt;
+Twitch.init({
+  clientId: YOUR_CLIENT_ID
+}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, status</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'the library is now loaded'</span>)
+});
+<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+</code></pre>
+            </div>
+
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> init = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options, callback</span>) </span>{
+    <span class="hljs-keyword">if</span> (!options.clientId) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'client id not specified'</span>);
+    }
+
+    Twitch._config.clientId = options.clientId;
+    Twitch._initSession();
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> callback === <span class="hljs-string">'function'</span>) {
+      Twitch.getStatus(callback);
+    }
+  };
+
+  Twitch.extend({
+    init: init
+  });
+})();
+<span class="hljs-comment">/*jshint expr:true*/</span>
+<span class="hljs-comment">/*global Twitch*/</span></pre></div></div>
+
+        </li>
+
+
+        <li id="section-16">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <h2 id="authentication">Authentication</h2>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-17">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Key of the sessionStorage object or cookie.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> SESSION_KEY = <span class="hljs-string">'twitch_oauth_session'</span>,
+    $ = Twitch.$;
+  <span class="hljs-keyword">var</span> parseFragment = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">hash</span>) </span>{
+    <span class="hljs-keyword">var</span> match,
+      session;
+
+    hash = hash || <span class="hljs-built_in">document</span>.location.hash;
+
+    <span class="hljs-keyword">var</span> hashMatch = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">expr</span>) </span>{
+      <span class="hljs-keyword">var</span> match = hash.match(expr);
+      <span class="hljs-keyword">return</span> match ? match[<span class="hljs-number">1</span>] : <span class="hljs-literal">null</span>;
+    };
+
+    session = {
+      token: hashMatch(<span class="hljs-regexp">/access_token=(\w+)/</span>),
+      scope: hashMatch(<span class="hljs-regexp">/scope=([\w+]+)/</span>) ? hashMatch(<span class="hljs-regexp">/scope=([\w+]+)/</span>).split(<span class="hljs-string">'+'</span>) : <span class="hljs-literal">null</span>,
+      state: hashMatch(<span class="hljs-regexp">/state=(\w+)/</span>),
+      error: hashMatch(<span class="hljs-regexp">/error=(\w+)/</span>),
+      errorDescription: hashMatch(<span class="hljs-regexp">/error_description=(\w+)/</span>)
+    };
+
+    <span class="hljs-keyword">return</span> session;
+  };</pre></div></div>
+
+        </li>
+
+
+        <li id="section-18">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Update session info from API and store.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> updateSession = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">callback</span>) </span>{
+    Twitch.api({method: <span class="hljs-string">'/'</span>}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, response</span>) </span>{
+      <span class="hljs-keyword">var</span> session;
+      <span class="hljs-keyword">if</span> (err) {
+        Twitch.log(<span class="hljs-string">'error encountered updating session:'</span>, err);
+        callback &amp;&amp; callback(err, <span class="hljs-literal">null</span>);
+        <span class="hljs-keyword">return</span>;
+      }
+
+      <span class="hljs-keyword">if</span> (!response.token.valid) {</pre></div></div>
+
+        </li>
+
+
+        <li id="section-19">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Invalid token. Either it has expired or the user has
+revoked permission, so clear out our stored data.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>        Twitch.logout(callback);
+        <span class="hljs-keyword">return</span>;
+      }
+
+      callback &amp;&amp; callback(<span class="hljs-literal">null</span>, session);
+    });
+  };</pre></div></div>
+
+        </li>
+
+
+        <li id="section-20">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Get the currently stored OAuth token.
+Useful for sending OAuth tokens to your backend.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> getToken = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> Twitch._config.session &amp;&amp; Twitch._config.session.token;
+  };</pre></div></div>
+
+        </li>
+
+
+        <li id="section-21">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Get the current authentication status. Will try to use the stored session
+if possible for speed.
+The <code>force</code> property will trigger an API request to update session data.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> getStatus = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options, callback</span>) </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">'function'</span>) {
+        callback = options;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> callback !== <span class="hljs-string">'function'</span>) {
+        callback = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{};
+    }
+    <span class="hljs-keyword">if</span> (!Twitch._config.session) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'You must call init() before getStatus()'</span>);
+    }
+
+    <span class="hljs-keyword">var</span> makeSession = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">session</span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-22">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>Make a session object for the client.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">return</span> {
+        authenticated: !!session.token,
+        token: session.token,
+        scope: session.scope,
+        error: session.error,
+        errorDescription: session.errorDescription
+      };
+    };
+
+    <span class="hljs-keyword">if</span> (options &amp;&amp; options.force) {
+      updateSession(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, session</span>) </span>{
+        callback(err, makeSession(session || Twitch._config.session));
+      });
+    } <span class="hljs-keyword">else</span> {
+      callback(<span class="hljs-literal">null</span>, makeSession(Twitch._config.session));
+    }
+  };</pre></div></div>
+
+        </li>
+
+
+        <li id="section-23">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>Login and redirect back to current page with an access token
+The popup parameter can be used to authorize users without
+leaving your page, as described <a href="http://stackoverflow.com/a/3602045/100296">here</a>.
+<strong>TODO</strong>: description about setting URI</p>
+<p>Usage:</p>
+<pre><code>Twitch.login({
+  redirect_uri: <span class="hljs-string">'http://myappurl.com/myoauthreturn'</span>,
+  popup: <span class="hljs-literal">false</span>,
+  scope: [<span class="hljs-string">'user_read'</span>, <span class="hljs-string">'channel_read'</span>]
+});
+</code></pre>
+            </div>
+
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> login = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options</span>) </span>{
+    <span class="hljs-keyword">if</span> (!options.scope) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Must specify list of requested scopes'</span>);
+    }
+    <span class="hljs-keyword">var</span> params = {
+      response_type: <span class="hljs-string">'token'</span>,
+      client_id: Twitch._config.clientId,</pre></div></div>
+
+        </li>
+
+
+        <li id="section-24">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>Redirecting to a fragment is forbidden by the OAuth spec,
+but we might be on a page with one.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>      redirect_uri: options.redirect_uri || <span class="hljs-built_in">window</span>.location.href.replace(<span class="hljs-regexp">/#.*$/</span>, <span class="hljs-string">''</span>),
+      scope: options.scope.join(<span class="hljs-string">' '</span>)
+    };
+
+    <span class="hljs-keyword">if</span> (!params.client_id) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'You must call init() before login()'</span>);
+    }
+
+    <span class="hljs-keyword">var</span> url = Twitch.baseUrl + <span class="hljs-string">'oauth2/authorize?'</span> + $.param(params);
+
+    <span class="hljs-keyword">if</span> (options.popup) {
+      Twitch._config.loginPopup = <span class="hljs-built_in">window</span>.open(url,
+                          <span class="hljs-string">"Login with TwitchTV"</span>,
+                          <span class="hljs-string">"height=600,width=660,resizable=yes,status=yes"</span>);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-built_in">window</span>.location = url;
+    }
+  };</pre></div></div>
+
+        </li>
+
+
+        <li id="section-25">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>Reset the session and delete from persistent storage, which is
+akin to logging out. This does not deactivate the access token
+given to your app, so you can continue to perform actions if
+your server stored the token.</p>
+<p>Usage:</p>
+<pre><code>Twitch.logout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>) </span>{
+  <span class="hljs-comment">// the user is now logged out</span>
+});
+</code></pre>
+            </div>
+
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> logout = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">callback</span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-26">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>Reset the current session</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    Twitch._config.session = {};</pre></div></div>
+
+        </li>
+
+
+        <li id="section-27">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>Remove from persistent storage.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    Twitch._storage.removeItem(SESSION_KEY);
+
+    Twitch.events.emit(<span class="hljs-string">'auth.logout'</span>);
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> callback === <span class="hljs-string">'function'</span>) {
+      callback(<span class="hljs-literal">null</span>);
+    }
+  };</pre></div></div>
+
+        </li>
+
+
+        <li id="section-28">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>Retrieve sessions from persistent storage and
+persist new ones.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> initSession = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> storedSession;
+
+    Twitch._config.session = {};</pre></div></div>
+
+        </li>
+
+
+        <li id="section-29">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <p>For browsers that do not have the JSON native object,
+<a href="http://bestiejs.github.com/json3">JSON.js</a> will work
+as a drop-in implementation.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.JSON) {
+      storedSession = Twitch._storage.getItem(SESSION_KEY);
+      <span class="hljs-keyword">if</span> (storedSession) {
+        <span class="hljs-keyword">try</span> {
+          Twitch._config.session = <span class="hljs-built_in">JSON</span>.parse(storedSession);
+        } <span class="hljs-keyword">catch</span> (e) {</pre></div></div>
+
+        </li>
+
+
+        <li id="section-30">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>        }
+      }
+    }</pre></div></div>
+
+        </li>
+
+
+        <li id="section-31">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>If we’re on a page with an access token, it’s probably a
+return uri for an authorization attempt. Overwrite with
+the new params if page has them.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">document</span>.location.hash.match(<span class="hljs-regexp">/access_token=(\w+)/</span>)) {
+      Twitch._config.session = parseFragment();</pre></div></div>
+
+        </li>
+
+
+        <li id="section-32">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>Persist to session storage on browsers that support it
+and cookies otherwise.</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.JSON) {
+        Twitch._storage.setItem(SESSION_KEY, <span class="hljs-built_in">JSON</span>.stringify(Twitch._config.session));
+      }
+    }
+
+    getStatus(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, status</span>) </span>{
+      <span class="hljs-keyword">if</span> (status.authenticated) {
+        Twitch.events.emit(<span class="hljs-string">'auth.login'</span>);
+      }
+    });
+  };
+
+  Twitch.extend({
+    _initSession: initSession,
+    _parseFragment: parseFragment,
+    getToken: getToken,
+    getStatus: getStatus,
+    login: login,
+    logout: logout
+  });
+})();<span class="hljs-comment">// ## Events</span>
+<span class="hljs-comment">/**
+ * EventEmitter v3.1.4
+ * https://github.com/Wolfy87/EventEmitter
+ *
+ * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
+ * Oliver Caldwell (olivercaldwell.co.uk)
+ */</span>
+
+(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">/**
+   * EventEmitter class
+   * Creates an object with event registering and firing methods
+   */</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">EventEmitter</span>(<span class="hljs-params"></span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-33">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>Initialise required storage variables</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>._events = {};
+    <span class="hljs-keyword">this</span>._maxListeners = <span class="hljs-number">10</span>;
+  }
+
+  <span class="hljs-comment">/**
+   * Event class
+   * Contains Event methods and property storage
+   *
+   * @param {String} type Event type name
+   * @param {Function} listener Function to be called when the event is fired
+   * @param {Object} scope Object that this should be set to when the listener is called
+   * @param {Boolean} once If true then the listener will be removed after the first call
+   * @param {Object} instance The parent EventEmitter instance
+   */</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Event</span>(<span class="hljs-params">type, listener, scope, once, instance</span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-34">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>Store arguments</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>.type = type;
+    <span class="hljs-keyword">this</span>.listener = listener;
+    <span class="hljs-keyword">this</span>.scope = scope;
+    <span class="hljs-keyword">this</span>.once = once;
+    <span class="hljs-keyword">this</span>.instance = instance;
+  }
+
+  <span class="hljs-comment">/**
+   * Executes the listener
+   *
+   * @param {Array} args List of arguments to pass to the listener
+   * @return {Boolean} If false then it was a once event
+   */</span>
+  Event.prototype.fire = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">args</span>) </span>{
+    <span class="hljs-keyword">this</span>.listener.apply(<span class="hljs-keyword">this</span>.scope || <span class="hljs-keyword">this</span>.instance, args);</pre></div></div>
+
+        </li>
+
+
+        <li id="section-35">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>Remove the listener if this is a once only listener</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.once) {
+      <span class="hljs-keyword">this</span>.instance.removeListener(<span class="hljs-keyword">this</span>.type, <span class="hljs-keyword">this</span>.listener, <span class="hljs-keyword">this</span>.scope);
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+  };
+
+  <span class="hljs-comment">/**
+   * Passes every listener for a specified event to a function one at a time
+   *
+   * @param {String} type Event type name
+   * @param {Function} callback Function to pass each listener to
+   * @return {Object} The current EventEmitter instance to allow chaining
+   */</span>
+  EventEmitter.prototype.eachListener = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">type, callback</span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-36">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>Initialise variables</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> i = <span class="hljs-literal">null</span>,
+      possibleListeners = <span class="hljs-literal">null</span>,
+      result = <span class="hljs-literal">null</span>;</pre></div></div>
+
+        </li>
+
+
+        <li id="section-37">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <p>Only loop if the type exists</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>._events.hasOwnProperty(type)) {
+      possibleListeners = <span class="hljs-keyword">this</span>._events[type];
+
+      <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; possibleListeners.length; i += <span class="hljs-number">1</span>) {
+        result = callback.call(<span class="hljs-keyword">this</span>, possibleListeners[i], i);
+
+        <span class="hljs-keyword">if</span>(result === <span class="hljs-literal">false</span>) {
+          i -= <span class="hljs-number">1</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(result === <span class="hljs-literal">true</span>) {
+          <span class="hljs-keyword">break</span>;
+        }
+      }
+    }</pre></div></div>
+
+        </li>
+
+
+        <li id="section-38">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <p>Return the instance to allow chaining</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  };
+
+  <span class="hljs-comment">/**
+   * Adds an event listener for the specified event
+   *
+   * @param {String} type Event type name
+   * @param {Function} listener Function to be called when the event is fired
+   * @param {Object} scope Object that this should be set to when the listener is called
+   * @param {Boolean} once If true then the listener will be removed after the first call
+   * @return {Object} The current EventEmitter instance to allow chaining
+   */</span>
+  EventEmitter.prototype.addListener = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">type, listener, scope, once</span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-39">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
+              <p>Create the listener array if it does not exist yet</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span>(!<span class="hljs-keyword">this</span>._events.hasOwnProperty(type)) {
+      <span class="hljs-keyword">this</span>._events[type] = [];
+    }</pre></div></div>
+
+        </li>
+
+
+        <li id="section-40">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-40">&#182;</a>
+              </div>
+              <p>Push the new event to the array</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>._events[type].push(<span class="hljs-keyword">new</span> Event(type, listener, scope, once, <span class="hljs-keyword">this</span>));</pre></div></div>
+
+        </li>
+
+
+        <li id="section-41">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <p>Emit the new listener event</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'newListener'</span>, type, listener, scope, once);</pre></div></div>
+
+        </li>
+
+
+        <li id="section-42">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-42">&#182;</a>
+              </div>
+              <p>Check if we have exceeded the maxListener count
+Ignore this check if the count is 0
+Also don’t check if we have already fired a warning</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>._maxListeners &amp;&amp; !<span class="hljs-keyword">this</span>._events[type].warned &amp;&amp; <span class="hljs-keyword">this</span>._events[type].length &gt; <span class="hljs-keyword">this</span>._maxListeners) {</pre></div></div>
+
+        </li>
+
+
+        <li id="section-43">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-43">&#182;</a>
+              </div>
+              <p>The max listener count has been exceeded!</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>      Twitch.log(<span class="hljs-string">'Possible EventEmitter memory leak detected. '</span> + <span class="hljs-keyword">this</span>._events[type].length + <span class="hljs-string">' listeners added. Use emitter.setMaxListeners() to increase limit.'</span>);</pre></div></div>
+
+        </li>
+
+
+        <li id="section-44">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-44">&#182;</a>
+              </div>
+              <p>Set the flag so it doesn’t fire again</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">this</span>._events[type].warned = <span class="hljs-literal">true</span>;
+    }</pre></div></div>
+
+        </li>
+
+
+        <li id="section-45">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-45">&#182;</a>
+              </div>
+              <p>Return the instance to allow chaining</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  };
+
+  <span class="hljs-comment">/**
+   * Alias of the addListener method
+   *
+   * @param {String} type Event type name
+   * @param {Function} listener Function to be called when the event is fired
+   * @param {Object} scope Object that this should be set to when the listener is called
+   * @param {Boolean} once If true then the listener will be removed after the first call
+   */</span>
+  EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+  <span class="hljs-comment">/**
+   * Alias of the addListener method but will remove the event after the first use
+   *
+   * @param {String} type Event type name
+   * @param {Function} listener Function to be called when the event is fired
+   * @param {Object} scope Object that this should be set to when the listener is called
+   * @return {Object} The current EventEmitter instance to allow chaining
+   */</span>
+  EventEmitter.prototype.once = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">type, listener, scope</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.addListener(type, listener, scope, <span class="hljs-literal">true</span>);
+  };
+
+  <span class="hljs-comment">/**
+   * Removes the a listener for the specified event
+   *
+   * @param {String} type Event type name the listener must have for the event to be removed
+   * @param {Function} listener Listener the event must have to be removed
+   * @param {Object} scope The scope the event must have to be removed
+   * @return {Object} The current EventEmitter instance to allow chaining
+   */</span>
+  EventEmitter.prototype.removeListener = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">type, listener, scope</span>) </span>{
+    <span class="hljs-keyword">this</span>.eachListener(type, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">currentListener, index</span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-46">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-46">&#182;</a>
+              </div>
+              <p>If this is the listener remove it from the array
+We also compare the scope if it was passed</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span>(currentListener.listener === listener &amp;&amp; (!scope || currentListener.scope === scope)) {
+        <span class="hljs-keyword">this</span>._events[type].splice(index, <span class="hljs-number">1</span>);
+      }
+    });</pre></div></div>
+
+        </li>
+
+
+        <li id="section-47">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-47">&#182;</a>
+              </div>
+              <p>Remove the property if there are no more listeners</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>._events[type] &amp;&amp; <span class="hljs-keyword">this</span>._events[type].length === <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">delete</span> <span class="hljs-keyword">this</span>._events[type];
+    }</pre></div></div>
+
+        </li>
+
+
+        <li id="section-48">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-48">&#182;</a>
+              </div>
+              <p>Return the instance to allow chaining</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  };
+
+  <span class="hljs-comment">/**
+   * Alias of the removeListener method
+   *
+   * @param {String} type Event type name the listener must have for the event to be removed
+   * @param {Function} listener Listener the event must have to be removed
+   * @param {Object} scope The scope the event must have to be removed
+   * @return {Object} The current EventEmitter instance to allow chaining
+   */</span>
+  EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+
+  <span class="hljs-comment">/**
+   * Removes all listeners for a specified event
+   * If no event type is passed it will remove every listener
+   *
+   * @param {String} type Event type name to remove all listeners from
+   * @return {Object} The current EventEmitter instance to allow chaining
+   */</span>
+  EventEmitter.prototype.removeAllListeners = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">type</span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-49">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-49">&#182;</a>
+              </div>
+              <p>Check for a type, if there is none remove all listeners
+If there is a type however, just remove the listeners for that type</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span>(type &amp;&amp; <span class="hljs-keyword">this</span>._events.hasOwnProperty(type)) {
+      <span class="hljs-keyword">delete</span> <span class="hljs-keyword">this</span>._events[type];
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!type) {
+      <span class="hljs-keyword">this</span>._events = {};
+    }</pre></div></div>
+
+        </li>
+
+
+        <li id="section-50">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-50">&#182;</a>
+              </div>
+              <p>Return the instance to allow chaining</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  };
+
+  <span class="hljs-comment">/**
+   * Retrieves the array of listeners for a specified event
+   *
+   * @param {String} type Event type name to return all listeners from
+   * @return {Array} Will return either an array of listeners or an empty array if there are none
+   */</span>
+  EventEmitter.prototype.listeners = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">type</span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-51">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-51">&#182;</a>
+              </div>
+              <p>Return the array of listeners or an empty array if it does not exist</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>._events.hasOwnProperty(type)) {</pre></div></div>
+
+        </li>
+
+
+        <li id="section-52">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-52">&#182;</a>
+              </div>
+              <p>It does exist, loop over building the array</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">var</span> listeners = [];
+
+      <span class="hljs-keyword">this</span>.eachListener(type, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">evt</span>) </span>{
+        listeners.push(evt.listener);
+      });
+
+      <span class="hljs-keyword">return</span> listeners;
+    }
+
+    <span class="hljs-keyword">return</span> [];
+  };
+
+  <span class="hljs-comment">/**
+   * Emits an event executing all appropriate listeners
+   * All values passed after the type will be passed as arguments to the listeners
+   *
+   * @param {String} type Event type name to run all listeners from
+   * @return {Object} The current EventEmitter instance to allow chaining
+   */</span>
+  EventEmitter.prototype.emit = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">type</span>) </span>{</pre></div></div>
+
+        </li>
+
+
+        <li id="section-53">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-53">&#182;</a>
+              </div>
+              <p>Calculate the arguments</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> args = [],
+      i = <span class="hljs-literal">null</span>;
+
+    <span class="hljs-keyword">for</span>(i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-built_in">arguments</span>.length; i += <span class="hljs-number">1</span>) {
+      args.push(<span class="hljs-built_in">arguments</span>[i]);
+    }
+
+    <span class="hljs-keyword">this</span>.eachListener(type, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">currentListener</span>) </span>{
+      <span class="hljs-keyword">return</span> currentListener.fire(args);
+    });</pre></div></div>
+
+        </li>
+
+
+        <li id="section-54">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-54">&#182;</a>
+              </div>
+              <p>Return the instance to allow chaining</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  };
+
+  <span class="hljs-comment">/**
+   * Sets the max listener count for the EventEmitter
+   * When the count of listeners for an event exceeds this limit a warning will be printed
+   * Set to 0 for no limit
+   *
+   * @param {Number} maxListeners The new max listener limit
+   * @return {Object} The current EventEmitter instance to allow chaining
+   */</span>
+  EventEmitter.prototype.setMaxListeners = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">maxListeners</span>) </span>{
+    <span class="hljs-keyword">this</span>._maxListeners = maxListeners;</pre></div></div>
+
+        </li>
+
+
+        <li id="section-55">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-55">&#182;</a>
+              </div>
+              <p>Return the instance to allow chaining</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  };</pre></div></div>
+
+        </li>
+
+
+        <li id="section-56">
+            <div class="annotation">
+
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-56">&#182;</a>
+              </div>
+              <p>Export the class</p>
+
+            </div>
+
+            <div class="content"><div class='highlight'><pre>  Twitch.extend({
+    events: <span class="hljs-keyword">new</span> EventEmitter()
+  });
+}());</pre></div></div>
+
+        </li>
+
+    </ul>
+  </div>
+</body>
+</html>
