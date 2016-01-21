@@ -123,7 +123,7 @@ session_start();
 
         $('.twitch-connect').click(function() {
             Twitch.login({
-				scope: ['user_read', 'channel_read'],
+				scope: ['user_read', 'channel_read', 'user_follows_edit'],
 				//redirect_uri: 'http://twitchden.com'
                 redirect_url: 'http://localhost/perugini.co/TwitchDen/twitchden.com/public_html/index.php'
             });
