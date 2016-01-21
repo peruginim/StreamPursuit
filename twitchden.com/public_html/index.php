@@ -205,11 +205,8 @@ session_start();
 
     <div class="container">
         <div class="jumbotron">
-            <h1>Twitch Stats</h1>
-            <p>Get live stats on total number of viewers and streamers on twitch. Working on now making pages that show live stream
-        data for a specified stream.</p>
-        <!-- This is a test for Bracket-Git -->
-        <!--<iframe style="width: 350px; height: 500px;" src="http://twitch.tv/twitchplayspokemon/chat?popout="></iframe>//-->
+            <h1>Welcome!</h1>
+            <p>TwitchDen let's you connect with Twitch and discover cool new chanels. Once your connected, head over to the Discover section to start watching a random stream! Once there you can like the channel, follow, or even reroll for a new stream. You can also check out these sweet stats from Twitch.</p>
         <script>
 
             function numberWithCommas(x)
