@@ -57,8 +57,8 @@ session_start();
                 // loop through results and log temperature to the console
                 $.each(results, function (i, row) {
                     //if($('#graph_progress').width <= 100)
-                    //    $('#graph_progress').width($('#graph_progress').width + 1);
                     //document.getElementById("graph_progress").style.width = i + '%';
+                    //    $('#graph_progress').width($('#graph_progress').width + 1);
                     data.addRow([
                         (new Date(row.timestamp)),
                         parseFloat(row.viewers)
