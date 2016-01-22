@@ -4,7 +4,7 @@ session_start();
 <!DOCTYPE HTML>
 <html lan="en">
 <head>
-	<title>Welcome to TwitchDen!</title>
+	<title>Welcome to StreamPursuit!</title>
 	<meta charset="UTF-8">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -58,7 +58,8 @@ session_start();
         $('.twitch-connect').click(function() {
             Twitch.login({
 				scope: ['user_read', 'channel_read', 'user_follows_edit'],
-				redirect_uri: 'http://streampursuit.tv'
+				//redirect_uri: 'http://streampursuit.tv'
+                redirect_url: 'http://localhost/perugini.co/StreamPursuit/streampursuit.tv/public_html/index.php'
             });
         })
 
@@ -99,7 +100,7 @@ session_start();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-                <a href="index.php" class="navbar-brand">TwitchDen<sup style="font-family:'Helvetica Neue'"><b>[Beta]</b></sup></a>
+                <a href="index.php" class="navbar-brand">SP<sup style="font-family:'Government'"><b>[Beta]</b></sup></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
@@ -138,10 +139,10 @@ session_start();
     <div class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">About TwitchDen</h3>
+            <h3 class="panel-title">About StreamPursuit</h3>
         </div>
         <div class="panel-body">
-            <p>TwitchDen is a website I wanted to create to learn and brush up on web development from the ground up. I wanted to remember how to launch and set up a VPS, get apache, mongodb, git, etc set up, and to re-learn php.</p>
+            <p>StreamPursuit is a website I wanted to create to learn and brush up on web development from the ground up. I wanted to remember how to launch and set up a VPS, get apache, mongodb, git, etc set up, and to re-learn php.</p>
             <p>My goal for this site is to do some cool stuff with the Twitch API. I originally wanted to make the site into a useful stream performance monitoring tool that would graph live video metrics (pretty much like the Video Stats feature on the Twitch Video Player), but I wansn't able to find an elegant solution for grabbing that sort of data. I think it is possible but might take a very large amount of work because you'd basically have to continuously grab video segments from twitch, analyze them, and graph the results. I thought it would be cooler if I just make something like Pandora for Twitch. I wanted to provide a way for people to explore some Twitch Channels that they never would have visited by just browsing the site.</p>
             <p>In the future I want to make a more robust random search with multiple options (specify a game, specify a language, etc) which should be pretty straight-forward.</p>
         </div>
