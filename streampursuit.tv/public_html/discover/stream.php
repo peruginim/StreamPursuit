@@ -4,7 +4,7 @@ session_start();
 <!doctype html>
 <html lan="en">
 <head>
-    <title>Welcome to TwitchDen!</title>
+    <title>Welcome to StreamPursuit!</title>
 	<meta charset="UTF-8">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -56,7 +56,8 @@ session_start();
         $('.twitch-connect').click(function() {
             Twitch.login({
 				scope: ['user_read', 'channel_read', 'user_follows_edit'],
-				redirect_uri: 'http://streampursuit.tv'
+				//redirect_uri: 'http://streampursuit.tv'
+                redirect_url: 'http://localhost/perugini.co/StreamPursuit/streampursuit.tv/public_html/index.php'
             });
         })
 
@@ -81,7 +82,7 @@ session_start();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-                <a href="../index.php" class="navbar-brand">TwitchDen<sup style="font-family:'Helvetica Neue'"><b>[Beta]</b></sup></a>
+                <a href="../index.php" class="navbar-brand">SP<sup style="font-family:'Government'"><b>[Beta]</b></sup></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
