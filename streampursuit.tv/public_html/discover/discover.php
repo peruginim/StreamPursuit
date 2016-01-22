@@ -139,13 +139,16 @@ session_start();
 
     <div class="container">
         <div class="jumbotron authenticate hidden">
-            <h1>Discover</h1>
-            <p>Discover lets you jump right into Twitch by hooking you up with a random stream. <br/><br/>Like what you see? Hit Like to give them a thumbs up, save that stream in a list of liked streams, and show some love by given them points on the Leaderboard! <br/><br/>Can't get enough? Hit Follow to add them to your Twitch followed streams! <br/><br/>Maybe you want to move on to the next awesome stream? Hit ReRoll and a shiny new channel will by layed out before your very eyes. <br/><br/></p><h2>Connect with Twitch to continue!</h2>
-            <a href="#" class="btn btn-primary btn-lg btn-block"><i class="fa fa-random"></i> Random</a>
+            <center><h1 style="font-family: 'Spire'">Discover</h1>
+                <p>Discover lets you jump right into Twitch by hooking you up with a random stream. <br/><br/>Like what you see? Hit Like to give them a thumbs up, save that stream in a list of liked streams, and show some love by given them points on the Leaderboard! <br/><br/>Can't get enough? Hit Follow to add them to your Twitch followed streams! <br/><br/>Maybe you want to move on to the next awesome stream? Hit ReRoll and a shiny new channel will by layed out before your very eyes.</p></center>
+            <br/>
+            <center class="authenticate hidden"><h2>Connect with Twitch to continue!</h2></center>
         </div>
-        <div class="jumbotron authenticated hidden">
-            <h1>Discover</h1>
-            <p>Jump in and find a random stream!</p>
+        <center>
+        <div class="col-md-3"></div>
+        <div class="col-md-6 panel panel-default authenticated hidden">
+            <h1 style="font-family: 'Spire'" size="6">Discover</h1>
+                <p>Jump in and find a random stream!</p>
             <!--<div class="well well-lg">
                 <form class="form-horizontal">
                     <fieldset>
@@ -156,10 +159,17 @@ session_start();
                     </fieldset>
                 </form>
             </div>-->
-            <a href="stream.php" class="btn btn-primary btn-lg btn-block"><i class="fa fa-random"></i> Random</a>
+            <a href="stream.php" class="btn btn-primary btn-lg"><i class="fa fa-random"></i> Random</a>
+            <br/>
+            <br/>
         </div>
+        <div class="col-md-3"></div>
+        </center>
     </div>
+    <br/>
+    <br/>
     <div class="container">
+       <center>
         <footer>
             <div class="row">
                 <div class="col-lg-12">
@@ -176,6 +186,7 @@ session_start();
                 </div>
             </div>
         </footer>
+        </center>
     </div>
 </body>
 </html>
