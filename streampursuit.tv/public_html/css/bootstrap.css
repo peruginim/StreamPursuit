@@ -280,6 +280,18 @@ th {
     font-family: 'DimitriBlack';
     src: url('../fonts/dimitri/dimitri_black.TTF') format('truetype');
 }
+@font-face {
+    font-family: 'TPF';
+    src: url('../fonts/tpf-praktika/TPF.TTF') format('truetype');
+}
+@font-face {
+    font-family: 'Spire';
+    src: url('../fonts/spire/spire-nbp.regular.ttf');
+}
+@font-face {
+    font-family: 'Government';
+    src: url('../fonts/government-agent-bb/GovtAgentBB.ttf');
+}
 .glyphicon {
   position: relative;
   top: 1px;
@@ -4298,7 +4310,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-width: 1px 0 0;
 }
 .navbar-brand {
-  font-family: 'Dimitri';
+  font-family: 'TPF';
   float: left;
   padding: 19.5px 15px;
   : 30px;
