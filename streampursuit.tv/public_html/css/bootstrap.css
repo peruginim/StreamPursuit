@@ -282,7 +282,7 @@ th {
 }
 @font-face {
     font-family: 'TPF';
-    src: url('../fonts/tpf-praktika/TPF.TTF') format('truetype');
+    src: url('../fonts/tpf-praktika/TPF.ttf') format('truetype');
 }
 @font-face {
     font-family: 'Spire';
