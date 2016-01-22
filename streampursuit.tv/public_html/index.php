@@ -4,7 +4,7 @@ session_start();
 <!DOCTYPE HTML>
 <html lan="en">
 <head>
-	<title>Welcome to TwitchDen!</title>
+	<title>Welcome to StreamPursuit!</title>
 	<meta charset="UTF-8">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -123,8 +123,8 @@ session_start();
         $('.twitch-connect').click(function() {
             Twitch.login({
 				scope: ['user_read', 'channel_read', 'user_follows_edit'],
-				//redirect_uri: 'http://twitchden.com'
-                redirect_url: 'http://streampursuit.tv'
+                //redirect_url: 'http://streampursuit.tv'
+                redirect_url: 'http://localhost/perugini.co/StreamPursuit/streampursuit.tv/public_html/index.php'
             });
         })
 
@@ -165,7 +165,7 @@ session_start();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-                <a href="index.php" class="navbar-brand">TwitchDen<sup style="font-family:'Helvetica Neue'"><b>[Beta]</b></sup></a>
+                <a href="index.php" class="navbar-brand">SP<sup style="font-family:'Government'"><b>[Beta]</b></sup></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
@@ -204,8 +204,8 @@ session_start();
 
     <div class="container">
         <div class="jumbotron">
-            <h1>Welcome!</h1>
-            <p>TwitchDen let's you connect with Twitch and discover cool new chanels. Once your connected, head over to the Discover section to start watching a random stream! Once there you can like the channel, follow, or even reroll for a new stream. You can also check out these sweet stats from Twitch.</p>
+            <center><h1 style="font-family: 'Spire'">StreamPursuit</h1>
+                <p style="font-family: 'Droid Sans'">StreamPursuit let's you search for cool new channels. Once you connect with your Twitch Account, head over to the Discover section to start watching a random stream! Once there you can like the channel, follow, or re-roll for a new stream. You can also check out these sweet stats from Twitch.</p></center>
         <script>
 
             function numberWithCommas(x)
