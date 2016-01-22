@@ -286,11 +286,11 @@ th {
 }
 @font-face {
     font-family: 'Spire';
-    src: url('../fonts/spire/spire-nbp.regular.ttf');
+    src: url('../fonts/spire/spire-nbp.regular.ttf') format('truetype');
 }
 @font-face {
     font-family: 'Government';
-    src: url('../fonts/government-agent-bb/GovtAgentBB.ttf');
+    src: url('../fonts/government-agent-bb/GovtAgentBB.ttf') format('truetype');
 }
 .glyphicon {
   position: relative;
