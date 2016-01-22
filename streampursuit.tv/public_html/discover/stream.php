@@ -182,21 +182,23 @@ session_start();
     </div>
     <br/>
     <div class="container">
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="list-inline">
-                        <li><a href="www.twitch.tv">Twitch</a></li>
-                        <li><a href="https://twitter.com/peruginim">Twitter</a></li>
-                        <li><a href="https://github.com/peruginim">GitHub</a></li>
-                        <li><a href="https://github.com/justintv/Twitch-API">API</a></li>
-                    </ul>
-                    <p>Made by <a href="" rel="nofollow">Michael Perugini</a> with <a href="https://github.com/justintv/Twitch-API">Twitch API</a>. Contact him at <a href="">11peruginiM@gmail.com.</p>
-                    <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>. Twitch font from <a href="http://www.dafont.com/dimitri.font">dafont</a>.</p>
+       <center>
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="list-inline">
+                            <li><a href="www.twitch.tv">Twitch</a></li>
+                            <li><a href="https://twitter.com/peruginim">Twitter</a></li>
+                            <li><a href="https://github.com/peruginim">GitHub</a></li>
+                            <li><a href="https://github.com/justintv/Twitch-API">API</a></li>
+                        </ul>
+                        <p>Made by <a href="" rel="nofollow">Michael Perugini</a> with <a href="https://github.com/justintv/Twitch-API">Twitch API</a>. Contact him at <a href="">11peruginiM@gmail.com.</p>
+                        <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>. Twitch font from <a href="http://www.dafont.com/dimitri.font">dafont</a>.</p>
 
+                    </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        </center>
     </div>
 </body>
 </html>
