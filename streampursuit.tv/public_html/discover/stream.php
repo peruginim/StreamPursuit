@@ -55,15 +55,9 @@ session_start();
 
         $('.twitch-connect').click(function() {
             Twitch.login({
-<<<<<<< HEAD
-				scope: ['user_read', 'channel_read', 'user_follows_edit'],
-				redirect_uri: 'http://streampursuit.tv'
-                //redirect_url: 'http://localhost/perugini.co/StreamPursuit/streampursuit.tv/public_html/index.php'
-=======
 				scope: ['user_read', 'user_follows_edit'],
 				redirect_uri: 'http://www.streampursuit.tv'
                 //redirect_uri: 'http://localhost/perugini.co/StreamPursuit/streampursuit.tv/public_html/index.php'
->>>>>>> origin/master
             });
         })
 

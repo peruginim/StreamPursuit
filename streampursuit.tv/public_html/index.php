@@ -122,15 +122,9 @@ session_start();
 
         $('.twitch-connect').click(function() {
             Twitch.login({
-<<<<<<< HEAD
-				scope: ['user_read', 'channel_read', 'user_follows_edit'],
-                redirect_url: 'http://streampursuit.tv'
-                //redirect_url: 'http://localhost/perugini.co/StreamPursuit/streampursuit.tv/public_html/index.php'
-=======
 				scope: ['user_read', 'user_follows_edit'],
                 redirect_uri: 'http://www.streampursuit.tv'
                 //redirect_uri: 'http://localhost/perugini.co/StreamPursuit/streampursuit.tv/public_html/index.php'
->>>>>>> origin/master
             });
         })
 
@@ -210,11 +204,7 @@ session_start();
 
     <div class="container">
         <div class="jumbotron">
-<<<<<<< HEAD
             <center><h1 style="font-family: 'Spire'">StreamPursuit</h1><hr>
-=======
-            <center><h1 style="font-family: 'Spire'">StreamPursuit</h1>
->>>>>>> origin/master
                 <p style="font-family: 'Droid Sans'">StreamPursuit let's you search for cool new channels. Once you connect with your Twitch Account, head over to the Discover section to start watching a random stream! Once there you can like the channel, follow, or re-roll for a new stream. You can also check out these sweet stats from Twitch.</p></center>
         <script>
 
