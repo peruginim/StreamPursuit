@@ -204,7 +204,7 @@ session_start();
 
     <div class="container">
         <div class="jumbotron">
-            <center><h1 style="font-family: 'Spire'">StreamPursuit</h1>
+            <center><h1 style="font-family: 'Spire'">StreamPursuit</h1><hr>
                 <p style="font-family: 'Droid Sans'">StreamPursuit let's you search for cool new channels. Once you connect with your Twitch Account, head over to the Discover section to start watching a random stream! Once there you can like the channel, follow, or re-roll for a new stream. You can also check out these sweet stats from Twitch.</p></center>
         <script>
 
