@@ -123,7 +123,7 @@ session_start();
         $('.twitch-connect').click(function() {
             Twitch.login({
 				scope: ['user_read', 'user_follows_edit'],
-                redirect_uri: 'http://streampursuit.tv'
+                redirect_uri: 'http://www.streampursuit.tv'
                 //redirect_uri: 'http://localhost/perugini.co/StreamPursuit/streampursuit.tv/public_html/index.php'
             });
         })
