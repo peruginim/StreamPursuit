@@ -154,7 +154,7 @@ session_start();
                 <div class="col-md-9">
                     <script>
                         document.write("<iframe src=\"http://player.twitch.tv/?channel="
-                                       + streamerName + "\" height=\"500\" width=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen muted=\"true\"> </iframe>");
+                                       + streamerName + "\" height=\"500\" width=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen> </iframe>");
                     </script>
                 </div>
                 <div class="col-md-3">
