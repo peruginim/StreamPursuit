@@ -139,7 +139,7 @@ session_start();
 
     <div class="container">
         <div class="jumbotron authenticate hidden">
-            <center><h1 style="font-family: 'Spire'">Discover</h1>
+            <center><h1 style="font-family: 'Spire'">Discover</h1><hr>
                 <p>Discover lets you jump right into Twitch by hooking you up with a random stream. <br/><br/>Like what you see? Hit Like to give them a thumbs up, save that stream in a list of liked streams, and show some love by given them points on the Leaderboard! <br/><br/>Can't get enough? Hit Follow to add them to your Twitch followed streams! <br/><br/>Maybe you want to move on to the next awesome stream? Hit ReRoll and a shiny new channel will by layed out before your very eyes.</p></center>
             <br/>
             <center class="authenticate hidden"><h2>Connect with Twitch to continue!</h2></center>
