@@ -11,7 +11,7 @@ function like($user, $id, $channel)
     try
     {
         $conn = new MongoClient();
-        $db = $conn->test;
+        $db = $conn->site;
         $collection = $db->users;
         $testquery = array('user_name' => $user);
         $cursor = $collection->find($testquery);
