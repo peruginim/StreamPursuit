@@ -56,8 +56,8 @@ session_start();
         $('.twitch-connect').click(function() {
             Twitch.login({
 				scope: ['user_read', 'user_follows_edit'],
-				redirect_uri: 'http://www.streampursuit.tv'
-                //redirect_uri: 'http://localhost/perugini.co/StreamPursuit/streampursuit.tv/public_html/index.php'
+				//redirect_uri: 'http://www.streampursuit.tv'
+                redirect_uri: 'http://localhost/perugini.co/StreamPursuit/streampursuit.tv/public_html/index.php'
             });
         })
 
@@ -68,7 +68,6 @@ session_start();
             // need to do this.
             window.location = window.location.pathname
         })
-
     });
     </script>
 </head>
@@ -129,6 +128,7 @@ session_start();
             var streamCount = streamsList.streams.length;
             var streamIndex = getRandomInt(0, streamCount);
             var streamerName = streamsList.streams[streamIndex].channel.name;
+            var streamerDisplayName = streamsList.streams[streamIndex].channel.display_name;
         </script>
         <div class="container">
             <div class="row no-gutter">
@@ -167,7 +167,7 @@ session_start();
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <a href="#" class="btn btn-primary btn-lg btn-block" id="like-button"><i class="fa fa-check"></i> Like</a>
+                    <a href="#" class="btn btn-primary btn-lg btn-block" id="like-button" onclick="like(streamerDisplayName)"><i class="fa fa-check"></i> Like</a>
                 </div>
                 <div class="col-md-4">
                     <a href="stream.php" class="btn btn-primary btn-lg btn-block" id="reroll-button"><i class="fa fa-repeat"></i> ReRoll</a>
