@@ -126,7 +126,7 @@ function unFollow(channel)
     var success = function()
     {
         // Change color of button to green and change 'Follow' to 'Followed'
-        document.getElementById("follow-button").innerHTML = "<i class=\"fa fa-heart\"></i> Follow";
+        document.getElementById("follow-button").innerHTML = "<i class=\"fa fa-heart\"></i> Followed";
         document.getElementById("follow-button").className = "btn btn-primary btn-lg btn-block";
         document.getElementById("follow-button").removeAttribute("onclick");
         //document.getElementById("follow-button").onclick = follow(channel);
@@ -151,6 +151,42 @@ function unFollow(channel)
             {
                 if(error) return failure(user.name);
                 success();
+            });
+        });
+    });
+}
+
+function like(channel)
+{
+    var success = function()
+    {
+
+    }
+    var failure = function(step)
+    {
+        window.alert(step);
+    }
+
+    Twitch.getStatus(function(error, status)
+    {
+        if(error) return failure("Failed to connect to Twitch.");
+        if(!status.authenticated) return failure("Please connect to Twitch.");
+
+        Twitch.api({method: 'user'}, function(error, user)
+        {
+            if(error) return failure("Something went wrong when trying to communicate with Twitch.");
+
+            data = {'user': user.display_name, 'channel': channel, 'user_id': user._id};
+            $.post("like.php", data, function(response)
+            {
+                if(response.localeCompare("liked") == 0)
+                {
+                    document.getElementById("like-button").innerHTML = "<i class=\"fa fa-check\"></i> Liked";
+                    document.getElementById("like-button").className = "btn btn-success btn-lg btn-block";
+                    document.getElementById("like-button").removeAttribute("onclick");
+                }
+                else
+                    failure("Something went wrong when trying to like this channel.");
             });
         });
     });
