@@ -21,6 +21,7 @@ function like($user, $id, $channel)
                         '_id' => $id,
                         'likes' => 1);
             $collection->insert($info);
+            $collection->update(array('user_name' => $user), array('$addToSet' => array('liked_channels' => $channel)));
             echo "liked";
         }
         else
