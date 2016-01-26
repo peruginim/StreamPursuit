@@ -51,7 +51,7 @@ session_start();
                         position: 'none'
                     },
                     series: {
-                        0: {color: '#7555B1'} // Purple color that was mixed between twitch dark purple and light purple.
+                        0: {color: '#335C85'} // Purple color that was mixed between twitch dark purple and light purple.
                     }
                 };
                 // loop through results and log temperature to the console
