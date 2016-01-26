@@ -145,7 +145,7 @@ session_start();
                     <h3 class="panel-title">About StreamPursuit</h3>
                 </div>
                 <div class="panel-body">
-                    <p>StreamPursuit is a website I wanted to create to learn and brush up on web development from the ground up. I wanted to remember how to launch and set up a VPS, get apache, mongodb, git, etc set up, and to re-learn php.</p>
+                    <p>StreamPursuit is a website I wanted to create to learn and brush up on web development from the ground up.</p>
                     <p>My goal for this site is to do some cool stuff with the Twitch API. I originally wanted to make the site into a useful stream performance monitoring tool that would graph live video metrics (pretty much like the Video Stats feature on the Twitch Video Player), but I wansn't able to find an elegant solution for grabbing that sort of data. I think it is possible but might take a very large amount of work because you'd basically have to continuously grab video segments from twitch, analyze them, and graph the results. I thought it would be cooler if I just make something like Pandora for Twitch. I wanted to provide a way for people to explore some Twitch Channels that they never would have visited by just browsing the site.</p>
                     <p>In the future I want to make a more robust random search with multiple options (specify a game, specify a language, etc) which should be pretty straight-forward.</p>
                 </div>
