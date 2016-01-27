@@ -99,7 +99,7 @@ session_start();
                                     Twitch.api({
                                         method: 'user'
                                     }, function(error, user) {
-                                        document.getElementById("welcome_user").innerHTML = "<b>" + "Welcome " + user.display_name + "<b/>";
+                                        document.getElementById("welcome_user").innerHTML = "<img src =" + user.logo + " style=\"width:30px;height:30px;border:1px solid black;\"/>" + "<b>" + " " + user.display_name + "<b/>";
                                     });
                                 });
                             </script></a>
@@ -151,6 +151,7 @@ session_start();
                     </div>
                 </div>
             </div>
+            <hr/>
             <div class="row">
                 <div class="col-md-9">
                     <script>
@@ -165,6 +166,7 @@ session_start();
                     </script>
                 </div>
             </div>
+            <hr/>
             <div class="row">
                 <div class="col-md-4">
                     <a href="#" class="btn btn-primary btn-lg btn-block authenticated hidden" id="like-button" onclick="like(streamerDisplayName)"><i class="fa fa-check"></i> Like</a>

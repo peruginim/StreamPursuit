@@ -183,7 +183,7 @@ session_start();
                                     Twitch.api({
                                         method: 'user'
                                     }, function(error, user) {
-                                        document.getElementById("welcome_user").innerHTML = "<b>" + "Welcome " + user.display_name + "<b/>";
+                                        document.getElementById("welcome_user").innerHTML = "<img src =" + user.logo + " style=\"width:30px;height:30px;border:1px solid black;\"/>" + "<b>" + " " + user.display_name + "<b/>";
                                     });
                                 });
                             </script></a>
