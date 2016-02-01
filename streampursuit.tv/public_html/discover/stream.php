@@ -99,7 +99,16 @@ session_start();
                                     Twitch.api({
                                         method: 'user'
                                     }, function(error, user) {
-                                        document.getElementById("welcome_user").innerHTML = "<img src =" + user.logo + " style=\"width:30px;height:30px;border:1px solid black;\"/>" + "<b>" + " " + user.display_name + "<b/>";
+                                        var userLogo = user.logo;
+
+                                        if(userLogo != null)
+                                        {
+                                            document.getElementById("welcome_user").innerHTML = "<img src =" + userLogo + " style=\"width:30px;height:30px;border:1px solid black;\"/>" + "<b>" + " " + user.display_name + "<b/>";
+                                        }
+                                        else
+                                        {
+                                            document.getElementById("welcome_user").innerHTML = "<img src =\"../images/default_logo.png\" style=\"width:30px;height:30px;border:1px solid black;\"/>" + "<b>" + " " + user.display_name + "<b/>";
+                                        }
                                     });
                                 });
                             </script></a>
@@ -129,12 +138,18 @@ session_start();
             var streamIndex = getRandomInt(0, streamCount);
             var streamerName = streamsList.streams[streamIndex].channel.name;
             var streamerDisplayName = streamsList.streams[streamIndex].channel.display_name;
+            var streamLogo = streamsList.streams[streamIndex].channel.logo;
         </script>
         <div class="container">
             <div class="row no-gutter">
                 <div class="col-md-1">
                     <center>
-                    <script>document.write("<img src =" + streamsList.streams[streamIndex].channel.logo + " style=\"width:60px;height:60px;\">");</script>
+                    <script>
+                        if(streamLogo != null)
+                            document.write("<img src =" + streamLogo + " style=\"width:60px;height:60px;\">");
+                        else
+                            document.write("<img src =\"../images/default_logo.png\" style=\"width:60px;height:60px;\">");
+                    </script>
                    </center>
                 </div>
                 <div class="col-md-10">
