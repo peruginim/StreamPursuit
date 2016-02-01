@@ -118,7 +118,16 @@ session_start();
                                     Twitch.api({
                                         method: 'user'
                                     }, function(error, user) {
-                                        document.getElementById("welcome_user").innerHTML = "<img src =" + user.logo + " style=\"width:30px;height:30px;border:1px solid black;\"/>" + "<b>" + " " + user.display_name + "<b/>";
+                                        var userLogo = user.logo;
+
+                                        if(userLogo != null)
+                                        {
+                                            document.getElementById("welcome_user").innerHTML = "<img src =" + userLogo + " style=\"width:30px;height:30px;border:1px solid black;\"/>" + "<b>" + " " + user.display_name + "<b/>";
+                                        }
+                                        else
+                                        {
+                                            document.getElementById("welcome_user").innerHTML = "<img src =\"../images/default_logo.png\" style=\"width:30px;height:30px;border:1px solid black;\"/>" + "<b>" + " " + user.display_name + "<b/>";
+                                        }
                                     });
                                 });
                             </script></a>
