@@ -12,7 +12,7 @@
     "url": "https://github.com/justintv/twitch-js-sdk.git"
   },
   "devDependencies": {
-    "uglify-js": "1.2.6",
+    "uglify-js": "3.6.0",
     "chai": "1.0.x",
     "mocha": "1.0.0",
     "sinon": "1.3.x",
